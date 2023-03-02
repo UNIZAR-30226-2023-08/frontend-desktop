@@ -1,5 +1,8 @@
 <RCC>
   <qresource prefix="logo">
+    <file>C12.jpg</file>
+    <file>118x260.png</file>
     <file>150.png</file>
+    <file>100x200.png</file>
   </qresource>
 </RCC>
