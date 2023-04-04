@@ -15,8 +15,9 @@ from Interfaces.clickableLabel import ClickableLabel
 class Ui_Tablero(object):
     def setupUi(self, Tablero):
         Tablero.setObjectName("Tablero")
-        Tablero.resize(1200, 800)
-        Tablero.setMaximumSize(QtCore.QSize(1200, 800))
+        Tablero.setEnabled(True)
+        Tablero.resize(1400, 900)
+        Tablero.setMaximumSize(QtCore.QSize(1500, 1000))
         self.centralwidget = QtWidgets.QWidget(Tablero)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
@@ -26,15 +27,15 @@ class Ui_Tablero(object):
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(230, 0, 856, 801))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(230, 0, 856, 891))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayoutCentral = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayoutCentral.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
         self.verticalLayoutCentral.setContentsMargins(0, 0, 0, 0)
         self.verticalLayoutCentral.setObjectName("verticalLayoutCentral")
-        self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.label.setObjectName("label")
-        self.verticalLayoutCentral.addWidget(self.label)
+        self.label_2 = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.label_2.setObjectName("label_2")
+        self.verticalLayoutCentral.addWidget(self.label_2)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.carta_jugada4 = QtWidgets.QLabel(self.verticalLayoutWidget)
@@ -68,8 +69,9 @@ class Ui_Tablero(object):
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+
         self.carta1 = ClickableLabel(self.verticalLayoutWidget)
-        self.carta1.setPixmap(QtGui.QPixmap(":/logo/C12.jpg"))
+        self.carta1.setPixmap(QtGui.QPixmap(":/logo/118x260.png"))
         self.carta1.setScaledContents(False)
         self.carta1.setAlignment(QtCore.Qt.AlignCenter)
         self.carta1.setWordWrap(False)
@@ -107,6 +109,14 @@ class Ui_Tablero(object):
         self.carta6.setObjectName("carta6")
         self.horizontalLayout_2.addWidget(self.carta6)
         self.verticalLayoutCentral.addLayout(self.horizontalLayout_2)
+        self.botonJugar = QtWidgets.QPushButton(self.centralwidget)
+        self.botonJugar.setEnabled(False)
+        self.botonJugar.setGeometry(QtCore.QRect(1110, 810, 121, 41))
+        self.botonJugar.setObjectName("botonJugar")
+        self.botonCantar = QtWidgets.QPushButton(self.centralwidget)
+        self.botonCantar.setEnabled(False)
+        self.botonCantar.setGeometry(QtCore.QRect(1260, 808, 111, 41))
+        self.botonCantar.setObjectName("botonCantar")
         Tablero.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(Tablero)
@@ -115,7 +125,9 @@ class Ui_Tablero(object):
     def retranslateUi(self, Tablero):
         _translate = QtCore.QCoreApplication.translate
         Tablero.setWindowTitle(_translate("Tablero", "MainWindow"))
-        self.label.setText(_translate("Tablero", "TextLabel"))
+        self.label_2.setText(_translate("Tablero", "TextLabel"))
+        self.botonJugar.setText(_translate("Tablero", "Jugar"))
+        self.botonCantar.setText(_translate("Tablero", "Cantar"))
 import Imagenes.imagenes_rc
 
 
