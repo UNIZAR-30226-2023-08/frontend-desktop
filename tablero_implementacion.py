@@ -6,7 +6,8 @@ from Interfaces.tablero import  Ui_Tablero
 from Interfaces.clickableLabel import ClickableLabel
 
 class tablero_implementacion(QMainWindow):
-    misCartas = ['oros-12', 'oros-4', 'copas-3', 'copas-7', 'copas-11', 'espadas-5']
+    cartaTriunfo = 'basto-6'
+    misCartas = ['oro-12', 'oro-4', 'copa-3', 'copa-7', 'basto-1', 'espada-5']
     numCartaSeleccionada = -1
     cartaSeleccionada = None
 
@@ -21,6 +22,7 @@ class tablero_implementacion(QMainWindow):
 
         #Conectar señales cartas
         self.rellenarMiMano()
+        self.mostrarTriunfo()
         self.ui.carta1.clicked.connect(lambda: self.seleccionarCarta(1, self.ui.carta1))
         self.ui.carta2.clicked.connect(lambda: self.seleccionarCarta(2, self.ui.carta2))
         self.ui.carta3.clicked.connect(lambda: self.seleccionarCarta(3, self.ui.carta3))
@@ -48,13 +50,11 @@ class tablero_implementacion(QMainWindow):
         self.cartaSeleccionada = None
         self.misCartas[self.numCartaSeleccionada] = 'dorso'
 
-        for carta in self.misCartas:
-            print(carta)
         #Desactivamos el botón de jugar
         self.ui.botonJugar.setEnabled(False)
 
     def rellenarMiMano(self):
-        self.misCartas.sort(key= len)
+        self.misCartas.sort()
         self.ui.carta1.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + self.misCartas[0] + ".png"))
         self.ui.carta2.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + self.misCartas[1] + ".png"))
         self.ui.carta3.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + self.misCartas[2] + ".png"))
@@ -62,6 +62,11 @@ class tablero_implementacion(QMainWindow):
         self.ui.carta5.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + self.misCartas[4] + ".png"))
         self.ui.carta6.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + self.misCartas[5] + ".png"))
 
+    def mostrarTriunfo(self):
+        pm = QtGui.QPixmap(":/cartas/cartas1/" + self.cartaTriunfo + ".png")
+        t = QtGui.QTransform()
+        t.rotate(-90)
+        self.ui.carta_triunfo.setPixmap(pm.transformed(t))
 
 def main():
     app = QApplication(sys.argv)
