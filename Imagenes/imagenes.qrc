@@ -1,9 +1,9 @@
 <RCC>
   <qresource prefix="logo">
     <file>Tapete_verde.jpg</file>
-    <file>C12.jpg</file>
     <file>118x260.png</file>
     <file>150.png</file>
+    <file>logo.png</file>
     <file>100x200.png</file>
   </qresource>
   <qresource prefix="cartas">

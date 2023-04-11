@@ -96,7 +96,9 @@ class Ui_Registro(object):
         self.label_contrasenya_registro.setObjectName("label_contrasenya_registro")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.label_contrasenya_registro)
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(280, 50, 150, 150))
+        self.label.setGeometry(QtCore.QRect(93, 90, 521, 71))
+        self.label.setText("")
+        self.label.setPixmap(QtGui.QPixmap(":/logo/logo.png"))
         self.label.setObjectName("label")
         Registro.setCentralWidget(self.centralwidget)
 
@@ -112,7 +114,6 @@ class Ui_Registro(object):
         self.boton_terminos.setText(_translate("Registro", "Acepto los términos y condiciones"))
         self.boton_confirmar_registro.setText(_translate("Registro", "Registrarse"))
         self.label_contrasenya_registro.setText(_translate("Registro", "Contraseña:"))
-        self.label.setText(_translate("Registro", "<html><head/><body><p><img src=\":/logo/150.png\"/></p></body></html>"))
 import Imagenes.imagenes_rc
 
 

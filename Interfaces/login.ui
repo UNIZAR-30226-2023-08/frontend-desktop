@@ -139,14 +139,17 @@ background-color: rgb(255,255,255)
     </property>
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>80</y>
-      <width>150</width>
-      <height>150</height>
+      <x>93</x>
+      <y>90</y>
+      <width>521</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/logo/150.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="../Imagenes/imagenes.qrc">:/logo/logo.png</pixmap>
     </property>
    </widget>
    <widget class="QCommandLinkButton" name="boton_registrarse">
@@ -190,18 +193,18 @@ background-color: rgb(255,255,255)
        <colorrole role="BrightText">
         <brush brushstyle="SolidPattern">
          <color alpha="255">
-          <red>255</red>
-          <green>255</green>
-          <blue>255</blue>
+          <red>7</red>
+          <green>64</green>
+          <blue>229</blue>
          </color>
         </brush>
        </colorrole>
        <colorrole role="ButtonText">
         <brush brushstyle="SolidPattern">
          <color alpha="255">
-          <red>0</red>
-          <green>0</green>
-          <blue>0</blue>
+          <red>21</red>
+          <green>28</green>
+          <blue>85</blue>
          </color>
         </brush>
        </colorrole>
@@ -230,7 +233,7 @@ background-color: rgb(255,255,255)
     </property>
     <property name="font">
      <font>
-      <family>Calibri</family>
+      <family>Segoe UI</family>
       <pointsize>9</pointsize>
       <bold>false</bold>
      </font>
