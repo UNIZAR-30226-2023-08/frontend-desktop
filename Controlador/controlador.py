@@ -17,15 +17,45 @@ class Controlador(object):
 
     def gestor_mensajes(self, ws, message):
         mensaje = json.loads(message)  # Decodificar el mensaje JSON
+        
+        if "Jugador" in mensaje:
+            self.num_jugador = mensaje["Jugador"]
+
         if "Cartas" in mensaje:
             cartas = self.formatear_cartas(mensaje["Cartas"])
             self.modelo.set_mano(cartas)
             self.vista.rellenarMiMano(self.modelo)
+
         if "Triunfo" in mensaje:
             triunfo = mensaje["Triunfo"]
             self.modelo.set_triunfo(triunfo[0] + "-" + str(triunfo[1]))
             self.vista.mostrarTriunfo(self.modelo)
-        return
+
+        if "Turno" in mensaje:
+            if self.num_jugador == mensaje["Turno"]:
+                self.vista.puede_jugar(True)
+            else:
+                self.vista.puede_jugar(False)
+
+        if "0" in mensaje:
+            #Carta jugador 1
+            carta = mensaje["0"]
+            if carta != None:
+                self.modelo.set_carta_jugada(0,carta[0] + "-" + str(carta[1]))
+            else:
+                self.modelo.set_carta_jugada(0, "no_hay_foto")
+            #Carta jugador 2
+            carta = mensaje["1"]
+            if carta != None:
+                self.modelo.set_carta_jugada(1,carta[0] + "-" + str(carta[1]))
+            else:
+                self.modelo.set_carta_jugada(1, "no_hay_foto")
+            
+            self.vista.mostrar_cartas_jugadas(self.modelo, self.num_jugador)
+
+        if "Ganador" in mensaje:
+            time.sleep(3)
+        
     
     def prueba_rellenar(self):
         self.modelo.set_mano(['oro-12', 'oro-4', 'copa-3', 'copa-7', 'basto-1', 'espada-5'])

@@ -40,7 +40,15 @@ class tablero_implementacion(QMainWindow):
         self.cartaSeleccionada = carta
         self.numCartaSeleccionada = numCarta - 1
         self.cartaSeleccionada.setStyleSheet("border: 2px solid red;")
-        self.ui.botonJugar.setEnabled(True)
+        if self.jugada_posible:
+            self.ui.botonJugar.setEnabled(True)
+
+    def puede_jugar(self, puede):
+        if puede:
+            self.jugada_posible = True
+        else:
+            self.jugada_posible = False
+            self.ui.botonJugar.setEnabled(False)
 
     def jugarCarta(self):
         #Mostramos la carta jugada en el centro
@@ -53,7 +61,14 @@ class tablero_implementacion(QMainWindow):
 
         #Desactivamos el botón de jugar
         self.controlador.jugar_carta(self.numCartaSeleccionada)
-        self.ui.botonJugar.setEnabled(False)
+
+    def mostrar_cartas_jugadas(self, modelo: modelo_tablero, jugador):
+        if jugador == 0:
+            self.ui.carta_jugada1.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.cartas_jugadas[0] + ".png").scaled(100,200))
+            self.ui.carta_jugada3.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.cartas_jugadas[1] + ".png").scaled(100,200))
+        else:
+            self.ui.carta_jugada1.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.cartas_jugadas[1] + ".png").scaled(100,200))
+            self.ui.carta_jugada3.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.cartas_jugadas[0] + ".png").scaled(100,200))
 
     def rellenarMiMano(self, modelo: modelo_tablero):
         self.ui.carta1.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.mis_cartas[0] + ".png"))
