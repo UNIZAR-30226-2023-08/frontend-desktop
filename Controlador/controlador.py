@@ -17,8 +17,11 @@ class Controlador(object):
         print("Conexión creada")
 
     def gestor_mensajes(self, ws, message):
-        mensaje = json.loads(message)  # Decodificar el mensaje JSON
-        
+        try:
+            mensaje = json.loads(message)  # Decodificar el mensaje JSON
+        except:
+            mensaje = message
+
         if "Jugador" in mensaje:
             self.num_jugador = mensaje["Jugador"]
 
@@ -26,17 +29,22 @@ class Controlador(object):
             cartas = self.formatear_cartas(mensaje["Cartas"])
             self.modelo.set_mano(cartas)
             self.vista.rellenarMiMano(self.modelo)
+        
+        if "Cartas posibles" in mensaje:
+            cartas = mensaje["Cartas"]
+            self.modelo.set_cartas_posibles(cartas)
 
         if "Triunfo" in mensaje:
             triunfo = mensaje["Triunfo"]
-            self.modelo.set_triunfo(triunfo[0] + "-" + str(triunfo[1]))
-            self.vista.mostrarTriunfo(self.modelo)
+            if triunfo != None:
+                self.modelo.set_triunfo(triunfo[0] + "-" + str(triunfo[1]))
+                self.vista.mostrarTriunfo(self.modelo)
 
         if "Turno" in mensaje:
             if self.num_jugador == mensaje["Turno"]:
-                self.vista.puede_jugar(True)
+                self.vista.puede_jugar(True, None)
             else:
-                self.vista.puede_jugar(False)
+                self.vista.puede_jugar(False, None)
 
         if "0" in mensaje:
             if not self.sala_espera: 
@@ -61,7 +69,15 @@ class Controlador(object):
                 self.vista.mostrar_jugadores_sala_espera(self.modelo)
 
         if "Ganador" in mensaje:
-            time.sleep(3)
+            #time.sleep(3)
+            pass
+
+        if "Cambiar7" == mensaje:
+            self.ws.send("False")
+
+        if "Comienza partida" == mensaje:
+            self.sala_espera = False
+            self.vista.pantallaTablero()
         
     
     def prueba_rellenar(self):

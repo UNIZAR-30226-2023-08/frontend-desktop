@@ -11,6 +11,7 @@ from Modelo.modelo import modelo_tablero
 class tablero_implementacion(QMainWindow):
     numCartaSeleccionada = -1
     cartaSeleccionada = None
+    num_cartas_posibles = []
 
     def __init__(self, username) -> None:
         super().__init__()
@@ -31,9 +32,10 @@ class tablero_implementacion(QMainWindow):
 
 
     def pantallaTablero(self):
+        print("a")
         self.ui = Ui_Tablero()
+        print("b")
         self.ui.setupUi(self)
-
         #Conectar señales cartas
         #self.rellenarMiMano()
         #self.mostrarTriunfo()
@@ -45,7 +47,6 @@ class tablero_implementacion(QMainWindow):
         self.ui.carta6.clicked.connect(lambda: self.seleccionarCarta(6, self.ui.carta6))
         #Conectar señales botones
         self.ui.botonJugar.clicked.connect(self.jugarCarta)
-        self.show()
 
     def seleccionarCarta(self, numCarta, carta):
         if self.cartaSeleccionada != None:
@@ -56,7 +57,7 @@ class tablero_implementacion(QMainWindow):
         if self.jugada_posible:
             self.ui.botonJugar.setEnabled(True)
 
-    def puede_jugar(self, puede):
+    def puede_jugar(self, puede, num_cartas_posibles):
         if puede:
             self.jugada_posible = True
         else:

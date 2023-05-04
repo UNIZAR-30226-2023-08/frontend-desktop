@@ -14,16 +14,20 @@ from Interfaces.clickableLabel import ClickableLabel
 
 class Ui_Tablero(object):
     def setupUi(self, Tablero):
-        Tablero.setObjectName("Tablero")
+        Tablero.setObjectName("Tablero")       
         Tablero.setEnabled(True)
+        
         Tablero.resize(1500, 1000)
         Tablero.setMaximumSize(QtCore.QSize(1500, 1000))
-        Tablero.setStyleSheet("\n"
-"")
+       
+        Tablero.setStyleSheet("")
+        print("c")
         self.centralwidget = QtWidgets.QWidget(Tablero)
+        print("f")
         self.centralwidget.setAutoFillBackground(False)
         self.centralwidget.setStyleSheet("")
         self.centralwidget.setObjectName("centralwidget")
+        
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 2, 2))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
@@ -166,9 +170,10 @@ class Ui_Tablero(object):
         self.label.raise_()
         self.label_4.raise_()
         Tablero.setCentralWidget(self.centralwidget)
-
         self.retranslateUi(Tablero)
+        print("e")
         QtCore.QMetaObject.connectSlotsByName(Tablero)
+        print("d")
 
     def retranslateUi(self, Tablero):
         _translate = QtCore.QCoreApplication.translate
@@ -176,7 +181,6 @@ class Ui_Tablero(object):
         self.botonJugar.setText(_translate("Tablero", "Jugar"))
         self.botonCantar.setText(_translate("Tablero", "Cantar"))
 import Imagenes.imagenes_rc
-
 
 if __name__ == "__main__":
     import sys
