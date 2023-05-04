@@ -3,6 +3,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5 import QtGui
 from Interfaces.tablero import  Ui_Tablero
+from Interfaces.salaEspera import  Ui_salaEspera
 from Interfaces.clickableLabel import ClickableLabel
 from Controlador.controlador import Controlador
 from Modelo.modelo import modelo_tablero
@@ -18,6 +19,18 @@ class tablero_implementacion(QMainWindow):
         self.inicializarGUI()
     
     def inicializarGUI(self):
+        self.ui = Ui_salaEspera()
+        self.ui.setupUi(self)
+
+    def mostrar_jugadores_sala_espera(self, modelo: modelo_tablero):
+        self.ui.j1_label.setText(modelo.jugador0)
+        self.ui.dorso1_label.setPixmap(QtGui.QPixmap(":/cartas/cartas1/oro-1.png"))
+        if modelo.jugador1 != "Jugador 2":
+            self.ui.j2_label.setText(modelo.jugador1)
+            self.ui.dorso2_label.setPixmap(QtGui.QPixmap(":/cartas/cartas1/copa-1.png"))
+
+
+    def pantallaTablero(self):
         self.ui = Ui_Tablero()
         self.ui.setupUi(self)
 

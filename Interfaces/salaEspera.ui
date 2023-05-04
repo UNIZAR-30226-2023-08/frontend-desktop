@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>salaEspera</class>
+ <widget class="QMainWindow" name="salaEspera">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -44,7 +44,7 @@
          <height>70</height>
         </size>
        </property>
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="EspJugLabel">
         <property name="geometry">
          <rect>
           <x>210</x>
@@ -113,7 +113,7 @@
             <string notr="true">background-color: rgba(191, 64, 64, 0);
 border-color: rgb(0, 0, 0);</string>
            </property>
-           <widget class="QLabel" name="label_3">
+           <widget class="QLabel" name="dorso1_label">
             <property name="geometry">
              <rect>
               <x>0</x>
@@ -132,7 +132,7 @@ border-color: rgb(0, 0, 0);</string>
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap>../Imagenes/cartas1/dorso.png</pixmap>
+             <pixmap resource="../Imagenes/imagenes.qrc">:/cartas/cartas1/dorso.png</pixmap>
             </property>
             <property name="scaledContents">
              <bool>true</bool>
@@ -166,7 +166,7 @@ border-color: rgb(0, 0, 0);</string>
 background-color: rgba(191, 64, 64, 0);
 border-color: rgb(0, 0, 0);</string>
            </property>
-           <widget class="QLabel" name="label_16">
+           <widget class="QLabel" name="dorso2_label">
             <property name="geometry">
              <rect>
               <x>0</x>
@@ -185,7 +185,7 @@ border-color: rgb(0, 0, 0);</string>
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap>../Imagenes/cartas1/dorso.png</pixmap>
+             <pixmap resource="../Imagenes/imagenes.qrc">:/cartas/cartas1/dorso.png</pixmap>
             </property>
             <property name="scaledContents">
              <bool>true</bool>
@@ -218,7 +218,7 @@ border-color: rgb(0, 0, 0);</string>
             <string notr="true">background-color: rgba(191, 64, 64, 0);
 border-color: rgb(0, 0, 0);</string>
            </property>
-           <widget class="QLabel" name="label_17">
+           <widget class="QLabel" name="dorso3_label">
             <property name="geometry">
              <rect>
               <x>0</x>
@@ -249,7 +249,7 @@ border-color: rgb(0, 0, 0);</string>
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap>../Imagenes/cartas1/dorso.png</pixmap>
+             <pixmap resource="../Imagenes/imagenes.qrc">:/cartas/cartas1/dorso.png</pixmap>
             </property>
             <property name="scaledContents">
              <bool>true</bool>
@@ -282,7 +282,7 @@ border-color: rgb(0, 0, 0);</string>
             <string notr="true">background-color: rgba(191, 64, 64, 0);
 border-color: rgb(0, 0, 0);</string>
            </property>
-           <widget class="QLabel" name="label_18">
+           <widget class="QLabel" name="dorso4_label">
             <property name="geometry">
              <rect>
               <x>0</x>
@@ -301,7 +301,7 @@ border-color: rgb(0, 0, 0);</string>
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap>../Imagenes/cartas1/dorso.png</pixmap>
+             <pixmap resource="../Imagenes/imagenes.qrc">:/cartas/cartas1/dorso.png</pixmap>
             </property>
             <property name="scaledContents">
              <bool>true</bool>
@@ -334,7 +334,7 @@ border-color: rgb(0, 0, 0);</string>
          <height>75</height>
         </size>
        </property>
-       <widget class="QLabel" name="label_6">
+       <widget class="QLabel" name="j1_label">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -350,7 +350,7 @@ border-color: rgb(0, 0, 0);</string>
          <set>Qt::AlignCenter</set>
         </property>
        </widget>
-       <widget class="QLabel" name="label_7">
+       <widget class="QLabel" name="j2_label">
         <property name="geometry">
          <rect>
           <x>200</x>
@@ -366,7 +366,7 @@ border-color: rgb(0, 0, 0);</string>
          <set>Qt::AlignCenter</set>
         </property>
        </widget>
-       <widget class="QLabel" name="label_8">
+       <widget class="QLabel" name="j3_label">
         <property name="geometry">
          <rect>
           <x>370</x>
@@ -382,7 +382,7 @@ border-color: rgb(0, 0, 0);</string>
          <set>Qt::AlignCenter</set>
         </property>
        </widget>
-       <widget class="QLabel" name="label_9">
+       <widget class="QLabel" name="j4_label">
         <property name="geometry">
          <rect>
           <x>550</x>
@@ -415,13 +415,15 @@ border-color: rgb(0, 0, 0);</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../Imagenes/Tapete_verde.jpg</pixmap>
+     <pixmap resource="../Imagenes/imagenes.qrc">:/logo/Tapete_verde.jpg</pixmap>
     </property>
    </widget>
    <zorder>label</zorder>
    <zorder>verticalLayoutWidget</zorder>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../Imagenes/imagenes.qrc"/>
+ </resources>
  <connections/>
 </ui>

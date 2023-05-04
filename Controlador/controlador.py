@@ -10,6 +10,7 @@ class Controlador(object):
         self.modelo = modelo
         self.vista = vista
         self.username = username
+        self.sala_espera = True
         threading.Thread(target=self.iniciarSocket).start()
         
     def on_open(self, ws):
@@ -38,20 +39,26 @@ class Controlador(object):
                 self.vista.puede_jugar(False)
 
         if "0" in mensaje:
-            #Carta jugador 1
-            carta = mensaje["0"]
-            if carta != None:
-                self.modelo.set_carta_jugada(0,carta[0] + "-" + str(carta[1]))
+            if not self.sala_espera: 
+                #Carta jugador 1
+                carta = mensaje["0"]
+                if carta != None:
+                    self.modelo.set_carta_jugada(0,carta[0] + "-" + str(carta[1]))
+                else:
+                    self.modelo.set_carta_jugada(0, "no_hay_foto")
+                #Carta jugador 2
+                carta = mensaje["1"]
+                if carta != None:
+                    self.modelo.set_carta_jugada(1,carta[0] + "-" + str(carta[1]))
+                else:
+                    self.modelo.set_carta_jugada(1, "no_hay_foto")
+                
+                self.vista.mostrar_cartas_jugadas(self.modelo, self.num_jugador)
             else:
-                self.modelo.set_carta_jugada(0, "no_hay_foto")
-            #Carta jugador 2
-            carta = mensaje["1"]
-            if carta != None:
-                self.modelo.set_carta_jugada(1,carta[0] + "-" + str(carta[1]))
-            else:
-                self.modelo.set_carta_jugada(1, "no_hay_foto")
-            
-            self.vista.mostrar_cartas_jugadas(self.modelo, self.num_jugador)
+                jugador0 = mensaje["0"]
+                jugador1 = mensaje["1"]
+                self.modelo.set_jugadores(jugador0, jugador1)
+                self.vista.mostrar_jugadores_sala_espera(self.modelo)
 
         if "Ganador" in mensaje:
             time.sleep(3)
