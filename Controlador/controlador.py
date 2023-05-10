@@ -13,6 +13,7 @@ class Controlador(object):
         self.vista = vista
         self.username = username
         self.sala_espera = True
+        self.direccion_socket_chat = "ws://localhost:8000/ws/"
         threading.Thread(target=self.iniciarSocket).start()
 
 
@@ -82,8 +83,13 @@ class Controlador(object):
                 self.vista.mostrar_jugadores_sala_espera(self.modelo)
 
         if "Ganador" in mensaje:
-            #time.sleep(3)
             pass
+
+        if "chat" in mensaje:
+            idChat = mensaje["chat"]
+            self.direccion_socket_chat += (idChat + "/" + self.username) 
+            print(self.direccion_socket_chat)
+            threading.Thread(target=self.iniciar_socket_chat).start()
 
         if "Cambiar7" == mensaje:
             self.ws.send("False")
@@ -106,4 +112,30 @@ class Controlador(object):
                                     on_error=self.on_error,
                                     on_close=self.on_close)
         self.ws.run_forever()
+
+
+    def gestor_mensajes_chat(self, ws, message):
+        try:
+            mensaje = json.loads(message)
+            if "username" in mensaje:
+                mensaje_usuario = mensaje["username"]
+                mensaje_texto = mensaje["message"]
+                self.vista.mostrar_mensaje(mensaje_usuario, mensaje_texto)
+        except:
+            self.vista.mostrar_mensaje(None, message)
+
+    def enviar_mensaje_chat(self, mensaje):
+        try:
+            message = json.dumps(mensaje)
+            self.ws_chat.send(message)
+        except:
+            pass
+
+    def iniciar_socket_chat(self):
+        self.ws_chat = websocket.WebSocketApp(self.direccion_socket_chat,
+                                              on_open=self.on_open,
+                                              on_message=self.gestor_mensajes_chat,
+                                              on_error=self.on_error,
+                                              on_close=self.on_close)
+        self.ws_chat.run_forever()
     

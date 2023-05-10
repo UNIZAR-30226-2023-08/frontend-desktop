@@ -52,6 +52,7 @@ class tablero_implementacion(QMainWindow):
 
         #Conectar señales botones
         self.ui_tablero.botonJugar.clicked.connect(self.jugarCarta)
+        self.ui_tablero.text_chat.returnPressed.connect(self.enviar_mensaje)
         self.ui_tablero.boton_enviar_chat.clicked.connect(self.enviar_mensaje)
         #Conectar señales cartas
         self.ui_tablero.carta1.clicked.connect(lambda: self.seleccionarCarta(1, self.ui_tablero.carta1))
@@ -131,13 +132,15 @@ class tablero_implementacion(QMainWindow):
 
 
 
-
+    def mostrar_mensaje(self, usuario, mensaje):
+        self.ui_tablero.chat_box.append(usuario + ": " + mensaje)
 
 
     def enviar_mensaje(self):
-        mensaje = self.ui_tablero.text_chat.text()
+        texto = self.ui_tablero.text_chat.text()
         self.ui_tablero.text_chat.clear()
-        self.ui_tablero.chat_box.append(self.username + ": " + mensaje)
+        self.controlador.enviar_mensaje_chat(texto)
+        
 
 def main():
     username = sys.argv[1]
