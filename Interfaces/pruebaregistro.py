@@ -10,20 +10,20 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_registro(object):
-    def setupUi(self, registro):
-        registro.setObjectName("registro")
-        registro.resize(706, 497)
-        registro.setMinimumSize(QtCore.QSize(706, 497))
-        registro.setMaximumSize(QtCore.QSize(706, 497))
-        registro.setStyleSheet("#centralwidget{\n"
+class Ui_prueba_registro(object):
+    def setupUi(self, prueba_registro):
+        prueba_registro.setObjectName("prueba_registro")
+        prueba_registro.resize(706, 497)
+        prueba_registro.setMinimumSize(QtCore.QSize(706, 497))
+        prueba_registro.setMaximumSize(QtCore.QSize(706, 497))
+        prueba_registro.setStyleSheet("#centralwidget{\n"
 "background-color: rgb(0, 85, 0);\n"
 "}\n"
 "\n"
 "#formLayout{\n"
 "background-color: rgb(255,255,255)\n"
 "}")
-        self.formLayoutWidget = QtWidgets.QWidget(registro)
+        self.formLayoutWidget = QtWidgets.QWidget(prueba_registro)
         self.formLayoutWidget.setGeometry(QtCore.QRect(50, 242, 581, 201))
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
@@ -98,21 +98,21 @@ class Ui_registro(object):
         self.label_contrasenya_registro.setFont(font)
         self.label_contrasenya_registro.setObjectName("label_contrasenya_registro")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.label_contrasenya_registro)
-        self.label = QtWidgets.QLabel(registro)
+        self.label = QtWidgets.QLabel(prueba_registro)
         self.label.setGeometry(QtCore.QRect(93, 90, 521, 71))
         self.label.setText("")
         self.label.setPixmap(QtGui.QPixmap(":/logo/logo.png"))
         self.label.setObjectName("label")
 
-        self.retranslateUi(registro)
-        QtCore.QMetaObject.connectSlotsByName(registro)
+        self.retranslateUi(prueba_registro)
+        QtCore.QMetaObject.connectSlotsByName(prueba_registro)
 
-    def retranslateUi(self, registro):
+    def retranslateUi(self, prueba_registro):
         _translate = QtCore.QCoreApplication.translate
-        self.label_nombre_real.setText(_translate("registro", "Nombre real:"))
-        self.label_nombre_usuario_registro.setText(_translate("registro", "Nombre de usuario:"))
-        self.label_correo.setText(_translate("registro", "Correo electrónico:"))
-        self.boton_terminos.setText(_translate("registro", "Acepto los términos y condiciones"))
-        self.boton_confirmar_registro.setText(_translate("registro", "Registrarse"))
-        self.label_contrasenya_registro.setText(_translate("registro", "Contraseña:"))
+        self.label_nombre_real.setText(_translate("prueba_registro", "Nombre real:"))
+        self.label_nombre_usuario_registro.setText(_translate("prueba_registro", "Nombre de usuario:"))
+        self.label_correo.setText(_translate("prueba_registro", "Correo electrónico:"))
+        self.boton_terminos.setText(_translate("prueba_registro", "Acepto los términos y condiciones"))
+        self.boton_confirmar_registro.setText(_translate("prueba_registro", "Registrarse"))
+        self.label_contrasenya_registro.setText(_translate("prueba_registro", "Contraseña:"))
 import Imagenes.imagenes_rc

@@ -10,26 +10,26 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_login(object):
-    def setupUi(self, login):
-        login.setObjectName("login")
-        login.resize(706, 497)
-        login.setMinimumSize(QtCore.QSize(706, 497))
-        login.setMaximumSize(QtCore.QSize(706, 497))
-        login.setStyleSheet("#centralwidget{\n"
+class Ui_prueba_login(object):
+    def setupUi(self, prueba_login):
+        prueba_login.setObjectName("prueba_login")
+        prueba_login.resize(706, 497)
+        prueba_login.setMinimumSize(QtCore.QSize(706, 497))
+        prueba_login.setMaximumSize(QtCore.QSize(706, 497))
+        prueba_login.setStyleSheet("#centralwidget{\n"
 "background-color: rgb(0, 85, 0);\n"
 "}\n"
 "\n"
 "#formLayout{\n"
 "background-color: rgb(255,255,255)\n"
 "}")
-        self.verticalLayoutWidget = QtWidgets.QWidget(login)
+        self.verticalLayoutWidget = QtWidgets.QWidget(prueba_login)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 2, 2))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.formLayoutWidget = QtWidgets.QWidget(login)
+        self.formLayoutWidget = QtWidgets.QWidget(prueba_login)
         self.formLayoutWidget.setGeometry(QtCore.QRect(50, 290, 611, 101))
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
@@ -72,13 +72,13 @@ class Ui_login(object):
         self.boton_login.setStyleSheet("background-color: rgb(255, 255, 0);")
         self.boton_login.setObjectName("boton_login")
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.boton_login)
-        self.label_foto_login = QtWidgets.QLabel(login)
+        self.label_foto_login = QtWidgets.QLabel(prueba_login)
         self.label_foto_login.setEnabled(True)
         self.label_foto_login.setGeometry(QtCore.QRect(93, 90, 521, 71))
         self.label_foto_login.setText("")
         self.label_foto_login.setPixmap(QtGui.QPixmap(":/logo/logo.png"))
         self.label_foto_login.setObjectName("label_foto_login")
-        self.boton_registrarse = QtWidgets.QCommandLinkButton(login)
+        self.boton_registrarse = QtWidgets.QCommandLinkButton(prueba_login)
         self.boton_registrarse.setGeometry(QtCore.QRect(360, 380, 261, 30))
         self.boton_registrarse.setMaximumSize(QtCore.QSize(300, 30))
         palette = QtGui.QPalette()
@@ -112,13 +112,13 @@ class Ui_login(object):
         self.boton_registrarse.setIconSize(QtCore.QSize(0, 0))
         self.boton_registrarse.setObjectName("boton_registrarse")
 
-        self.retranslateUi(login)
-        QtCore.QMetaObject.connectSlotsByName(login)
+        self.retranslateUi(prueba_login)
+        QtCore.QMetaObject.connectSlotsByName(prueba_login)
 
-    def retranslateUi(self, login):
+    def retranslateUi(self, prueba_login):
         _translate = QtCore.QCoreApplication.translate
-        self.label_nombre_usuario.setText(_translate("login", "Nombre de usuario:"))
-        self.label_contrasenya.setText(_translate("login", "Contraseña:"))
-        self.boton_login.setText(_translate("login", "Login"))
-        self.boton_registrarse.setText(_translate("login", "¿No tienes cuenta? ¡Registrate gratis!"))
+        self.label_nombre_usuario.setText(_translate("prueba_login", "Nombre de usuario:"))
+        self.label_contrasenya.setText(_translate("prueba_login", "Contraseña:"))
+        self.boton_login.setText(_translate("prueba_login", "Login"))
+        self.boton_registrarse.setText(_translate("prueba_login", "¿No tienes cuenta? ¡Registrate gratis!"))
 import Imagenes.imagenes_rc
