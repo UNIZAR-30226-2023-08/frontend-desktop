@@ -93,6 +93,7 @@ class Controlador(object):
 
         if "Cambiar7" == mensaje:
             self.ws.send("False")
+            #Acabar
 
         if "Comienza partida" == mensaje:
             self.sala_espera = False

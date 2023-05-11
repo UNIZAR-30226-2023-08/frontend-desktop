@@ -1,4 +1,6 @@
 import sys
+import requests
+import json
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QStackedWidget, QWidget, QVBoxLayout
 from Interfaces.login import Ui_login
@@ -9,6 +11,7 @@ class login_implementacion(QMainWindow):
         super().__init__()
 
         self.inicializarGUI()
+        self.rutaPeticiones = 'http://localhost:8000'
 
 
     def inicializarGUI(self):
@@ -46,13 +49,8 @@ class login_implementacion(QMainWindow):
 
         #Conectar botones registro
         self.ui_registro.boton_confirmar_registro.clicked.connect(self.registrarse)
-        """
-        elf.ui = Ui_Login()
-        self.ui.setupUi(self)
         
-        
-        self.show()
-        """
+
     def iniciar_sesion(self):
         nombre_usuario = self.ui_login.text_nombre_usuario.text().strip()
         contrasenya = self.ui_login.text_contrasenya.text().strip()
@@ -64,14 +62,26 @@ class login_implementacion(QMainWindow):
             mensaje.setText("Todos los campos deben estar rellenados")
             mensaje.exec_()
         else:
-            pass
+            params = {'username': nombre_usuario, 
+                      'password': contrasenya}
+            #params_parseados = json.dumps(params)
+            response = requests.post(self.rutaPeticiones + '/token', data=params)
+            response_parsed = response.json()
 
+            if response.status_code == 401:
+                mensaje.setIcon(QMessageBox.Warning)
+                mensaje.setText(response_parsed["detail"])
+                mensaje.exec_()
+
+            elif response.status_code == 200:
+                mensaje.setText("Loggeado")
+                mensaje.exec_()
+                
     
     def cambioPantallaRegistro(self):
         self.stacked_widget.setCurrentWidget(self.registro_widget)
 
         
-
     def registrarse(self):
         nombre_real = self.ui_registro.text_nombre_real.text().strip()
         nombre_usuario = self.ui_registro.text_nombre_usuario_registro.text().strip()
@@ -90,7 +100,24 @@ class login_implementacion(QMainWindow):
             mensaje.setText("Debe aceptar los términos de la aplicación")
             mensaje.exec_()
         else:
-            pass
+            params = {'username': nombre_usuario, 
+                      'email': correo_electronico, 
+                      'real_name': nombre_real, 
+                      'hashed_password': contrasenya}
+            params_parsed = json.dumps(params)
+            response = requests.post(self.rutaPeticiones + '/register', data=params_parsed)
+            response_parsed = response.json()
+
+            if response.status_code == 200:
+                mensaje.setIcon(QMessageBox.Warning)
+                mensaje.setText("Registro realizado correctamente")
+                mensaje.exec_()
+                self.stacked_widget.setCurrentWidget(self.login_widget)
+            
+            elif response.status_code == 400:
+                mensaje.setIcon(QMessageBox.Warning)
+                mensaje.setText("Nobre de usuario en uso")
+                mensaje.exec_()
 
 
 
