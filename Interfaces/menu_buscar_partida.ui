@@ -64,27 +64,37 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QLabel" name="label_5">
+       <widget class="QWidget" name="widget_5" native="true">
         <property name="maximumSize">
          <size>
           <width>231</width>
           <height>125</height>
          </size>
         </property>
-        <property name="font">
-         <font>
-          <pointsize>22</pointsize>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>ArrowCursor</cursorShape>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
+        <widget class="QPushButton" name="boton_confirmar_registro_2">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>40</y>
+           <width>151</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Calibri</family>
+           <pointsize>11</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 0);</string>
+         </property>
+         <property name="text">
+          <string>Volver</string>
+         </property>
+        </widget>
        </widget>
       </item>
       <item>
@@ -317,27 +327,53 @@ border-color: rgb(0, 0, 0);</string>
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="QLabel" name="label_9">
+       <widget class="QWidget" name="widget_4" native="true">
         <property name="maximumSize">
          <size>
           <width>231</width>
           <height>125</height>
          </size>
         </property>
-        <property name="font">
-         <font>
-          <pointsize>22</pointsize>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>ArrowCursor</cursorShape>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
+        <widget class="QSpinBox" name="spinBox">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>50</y>
+           <width>191</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> jugadores</string>
+         </property>
+         <property name="prefix">
+          <string>Partida </string>
+         </property>
+         <property name="minimum">
+          <number>2</number>
+         </property>
+         <property name="maximum">
+          <number>4</number>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_3">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>40</y>
+           <width>209</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(222, 221, 218);</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+        <zorder>label_3</zorder>
+        <zorder>spinBox</zorder>
        </widget>
       </item>
       <item>
