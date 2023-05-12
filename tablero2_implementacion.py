@@ -3,8 +3,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QStackedWidget, QWidget, QVBoxLayout
 from PyQt5 import QtGui, QtCore
 from Interfaces.tablero2 import Ui_tablero2
-from Interfaces.salaEspera4 import Ui_sala_espera4
-from Interfaces.clickableLabel import ClickableLabel
+from Interfaces.salaEspera2 import Ui_sala_espera2
 from Controlador.controlador import Controlador
 from Modelo.modelo import modelo_tablero
 
@@ -28,7 +27,7 @@ class tablero_implementacion(QMainWindow):
 
         #Crear los widgets que se desean agregar al QStacketWidget
         self.sala_espera_widget = QWidget()
-        self.ui_sala_espera = Ui_sala_espera4()
+        self.ui_sala_espera = Ui_sala_espera2()
         self.ui_sala_espera.setupUi(self.sala_espera_widget)
         
 

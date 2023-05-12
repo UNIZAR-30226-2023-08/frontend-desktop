@@ -3,7 +3,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QStackedWidget, QWidget, QVBoxLayout
 from PyQt5 import QtGui, QtCore
 from Interfaces.tablero3 import Ui_tablero3
-from Interfaces.salaEspera4 import Ui_sala_espera4
+from Interfaces.salaEspera3 import Ui_sala_espera3
 from Interfaces.clickableLabel import ClickableLabel
 from Controlador.controlador import Controlador
 from Modelo.modelo import modelo_tablero
@@ -29,7 +29,7 @@ class tablero_implementacion(QMainWindow):
 
         #Crear los widgets que se desean agregar al QStacketWidget
         self.sala_espera_widget = QWidget()
-        self.ui_sala_espera = Ui_sala_espera4()
+        self.ui_sala_espera = Ui_sala_espera3()
         self.ui_sala_espera.setupUi(self.sala_espera_widget)
         
 
@@ -77,10 +77,6 @@ class tablero_implementacion(QMainWindow):
         if modelo.jugador2 != "Esperando...":
             self.ui_sala_espera.j3_label.setText(modelo.jugador2)
             self.ui_sala_espera.dorso3_label.setPixmap(QtGui.QPixmap(":/cartas/cartas1/espada-1.png"))
-
-        if modelo.jugador3 != "Esperando...":
-            self.ui_sala_espera.j4_label.setText(modelo.jugador3)
-            self.ui_sala_espera.dorso4_label.setPixmap(QtGui.QPixmap(":/cartas/cartas1/basto-1.png"))
 
         
 

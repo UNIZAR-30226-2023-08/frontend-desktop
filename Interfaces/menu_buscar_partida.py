@@ -13,7 +13,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_menu_buscar_partida(object):
     def setupUi(self, menu_buscar_partida):
         menu_buscar_partida.setObjectName("menu_buscar_partida")
-        menu_buscar_partida.resize(711, 501)
+        menu_buscar_partida.resize(706, 497)
+        menu_buscar_partida.setMinimumSize(QtCore.QSize(706, 497))
+        menu_buscar_partida.setMaximumSize(QtCore.QSize(706, 497))
         self.label = QtWidgets.QLabel(menu_buscar_partida)
         self.label.setGeometry(QtCore.QRect(0, 0, 706, 497))
         self.label.setText("")
