@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>menu_inicial</class>
+ <widget class="QWidget" name="menu_inicial">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -29,7 +29,7 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="frontend-desktop/Imagenes/imagenes.qrc">:/logo/Tapete_verde.jpg</pixmap>
+    <pixmap>:/logo/Tapete_verde.jpg</pixmap>
    </property>
   </widget>
   <widget class="QLabel" name="dorso">
@@ -51,7 +51,7 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="frontend-desktop/Imagenes/imagenes.qrc">:/cartas/cartas1/oro-1.png</pixmap>
+    <pixmap>:/cartas/cartas1/oro-1.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
