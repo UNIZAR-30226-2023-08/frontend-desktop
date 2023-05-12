@@ -75,11 +75,8 @@ class login_implementacion(QMainWindow):
                 mensaje.exec_()
 
             elif response.status_code == 200:
-                #mensaje.setText("Loggeado")
-                #mensaje.exec_()
                 self.close()
-                subprocess.call(["python", "Interfaces/menu.py"])
-                #sys.exit()
+                subprocess.call(["python", "menu_implementacion.py", response_parsed["access_token"]])
                 
     
     def cambioPantallaRegistro(self):

@@ -1,4 +1,5 @@
 import sys
+import requests
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QStackedWidget, QWidget, QVBoxLayout, QStyleFactory
 from PyQt5.QtGui import QColor
@@ -7,10 +8,11 @@ from Interfaces.menuInicial import Ui_menu_inicial
 from Interfaces.estadisticas import Ui_estadisticas
 
 class menu_implementacion(QMainWindow):
-    def __init__(self) -> None:
+    def __init__(self, access_token) -> None:
         super().__init__()
 
         self.inicializarGUI()
+        self.token = access_token
 
     def inicializarGUI(self):
         #Crear un objeto QStackedWidget
@@ -45,8 +47,11 @@ class menu_implementacion(QMainWindow):
         # Agregar el QStackedWidget al layout
         layout.addWidget(self.stacked_widget)
 
+        #Conectar señales de los botones
         self.ui_menu_inicial.boton_jugar.clicked.connect(self.pantalla_buscar_partida)
         self.ui_menu_inicial.boton_estadisticas.clicked.connect(self.pantalla_estadisticas)
+        self.ui_buscar_partida.boton_volver.clicked.connect(self.pantalla_inicial)
+        self.ui_estadisticas.boton_volver.clicked.connect(self.pantalla_inicial)
         
         # Aplicar estilo Fusion
         style = QStyleFactory.create('Fusion')
@@ -72,41 +77,52 @@ class menu_implementacion(QMainWindow):
     
     def pantalla_estadisticas(self):
         self.stacked_widget.setCurrentWidget(self.estadisticas_widget)
-        self.rellenarRanking()
+        self.rellenar_pantalla_estadisticas()
+
+    def pantalla_inicial(self):
+        self.stacked_widget.setCurrentWidget(self.menu_inicial_widget)
         
+    def rellenar_pantalla_estadisticas(self):
+        self.rellenarEstadisticas()
+        self.rellenarRanking()
+
+    def rellenarEstadisticas(self):
+        headers = {'Authorization': f'Bearer ' + self.token}
+        response = requests.get('http://localhost:8000/users/me', headers=headers)
+        response_parsed = response.json()
+        nombre_usuario = response_parsed['username']
+        victorias = int(response_parsed['winMatches'])
+        derrotas = int(response_parsed['looseMatches'])
+        lp = response_parsed['lp']
+        if victorias == 0 and derrotas == 0:
+            ratio = "N/A"
+        elif derrotas == 0:
+            ratio = "100%"
+        else:
+            ratio = str((victorias/(victorias + derrotas) * 100).__round__(2)) + "%"
+        
+        self.ui_estadisticas.label_nombre.setText(nombre_usuario)
+        self.ui_estadisticas.label_vicrotias_derrotas.setText(str(victorias) + "/" + str(derrotas))
+        self.ui_estadisticas.label_porcentaje_victorias.setText(ratio)
+        self.ui_estadisticas.label_puntos.setText(str(lp))
 
     def rellenarRanking(self):
-        ranking = [
-            {'nombre': 'Jugador 1', 'puntos': 100},
-            {'nombre': 'Jugador 2', 'puntos': 80},
-            {'nombre': 'Jugador 3', 'puntos': 70},
-            {'nombre': 'Jugador 4', 'puntos': 50},
-            {'nombre': 'Jugador 1', 'puntos': 100},
-            {'nombre': 'Jugador 2', 'puntos': 80},
-            {'nombre': 'Jugador 3', 'puntos': 70},
-            {'nombre': 'Jugador 4', 'puntos': 50},
-            {'nombre': 'Jugador 1', 'puntos': 100},
-            {'nombre': 'Jugador 2', 'puntos': 80},
-            {'nombre': 'Jugador 3', 'puntos': 70},
-            {'nombre': 'Jugador 4', 'puntos': 50},
-            {'nombre': 'Jugador 1', 'puntos': 100},
-            {'nombre': 'Jugador 2', 'puntos': 80},
-            {'nombre': 'Jugador 3', 'puntos': 70},
-            {'nombre': 'Jugador 4', 'puntos': 50},
-            {'nombre': 'Jugador 1', 'puntos': 100},
-            {'nombre': 'Jugador 2', 'puntos': 80},
-            {'nombre': 'Jugador 3', 'puntos': 70},
-            {'nombre': 'Jugador 4', 'puntos': 50},
-        ]
+        parametros = {'limite_lista': 10}
+        headers = {'Authorization': f'Bearer ' + self.token}
+        response = requests.get('http://localhost:8000/ranking', headers=headers,params=parametros)
+        response_parsed = response.json()
+
+        ranking = response_parsed
 
         for jugador in ranking:
-            self.ui_estadisticas.listWidget.addItem(f"  {jugador['nombre']}: {jugador['puntos']} puntos")
+            self.ui_estadisticas.listWidget.addItem(f" Usuario: {jugador['username']}: {jugador['lp']} puntos  Victorias: {jugador['winMatches']}  Derrotas: {jugador['looseMatches']}")
 
+        
     # def pantalla_tienda(self):
         
 def main():
     app = QApplication(sys.argv)
-    ventana = menu_implementacion()
+    ventana = menu_implementacion(sys.argv[1])
     ventana.show()
 
     sys.exit(app.exec_())

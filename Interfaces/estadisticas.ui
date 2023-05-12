@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>estadisticas</class>
+ <widget class="QWidget" name="estadisticas">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -104,7 +104,7 @@
     <string>Ranking de jugadores</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="boton_confirmar_registro_2">
+  <widget class="QPushButton" name="boton_volver">
    <property name="geometry">
     <rect>
      <x>10</x>
