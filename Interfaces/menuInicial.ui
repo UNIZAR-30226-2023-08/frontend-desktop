@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>706</width>
+    <height>497</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>706</width>
+     <height>497</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-color: rgb(224, 27, 36);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="frontend-desktop/Imagenes/imagenes.qrc">:/logo/Tapete_verde.jpg</pixmap>
+   </property>
+  </widget>
+  <widget class="QLabel" name="dorso">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>80</y>
+     <width>181</width>
+     <height>315</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(191, 64, 64, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="frontend-desktop/Imagenes/imagenes.qrc">:/cartas/cartas1/oro-1.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="LabelGuiote">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>90</y>
+     <width>294</width>
+     <height>39</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>600</width>
+     <height>50</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans</family>
+     <pointsize>26</pointsize>
+     <weight>9</weight>
+     <italic>true</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>ArrowCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 204, 0);
+border-color: rgb(224, 27, 36);
+font: 75 italic 26pt &quot;Sans&quot;;
+</string>
+   </property>
+   <property name="lineWidth">
+    <number>9</number>
+   </property>
+   <property name="text">
+    <string>Guiñote</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="boton_jugar">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>170</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri</family>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 0);</string>
+   </property>
+   <property name="text">
+    <string>JUGAR</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="boton_estadisticas">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>250</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri</family>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 0);</string>
+   </property>
+   <property name="text">
+    <string>ESTADISTICAS</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="boton_tienda">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>330</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri</family>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 0);</string>
+   </property>
+   <property name="text">
+    <string>TIENDA</string>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="frontend-desktop/Imagenes/imagenes.qrc"/>
+  <include location="../../../../../Imagenes/imagenes.qrc"/>
+ </resources>
+ <connections/>
+</ui>
