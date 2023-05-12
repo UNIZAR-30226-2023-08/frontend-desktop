@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>tablero4</class>
- <widget class="QWidget" name="tablero4">
+ <class>tablero2</class>
+ <widget class="QWidget" name="tablero2">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -88,28 +88,12 @@
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QLabel" name="carta_jugada4">
-          <property name="autoFillBackground">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap resource="../Imagenes/imagenes.qrc">:/logo/100x200.png</pixmap>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
        </layout>
       </item>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QLabel" name="carta_jugada3">
+         <widget class="QLabel" name="carta_jugada2">
           <property name="enabled">
            <bool>true</bool>
           </property>
@@ -143,12 +127,9 @@
        </layout>
       </item>
       <item>
-       <widget class="QLabel" name="carta_jugada2">
+       <widget class="QLabel" name="vacio">
         <property name="text">
          <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="../Imagenes/imagenes.qrc">:/logo/100x200.png</pixmap>
         </property>
         <property name="alignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -313,38 +294,6 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>50</y>
-     <width>121</width>
-     <height>611</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="../Imagenes/imagenes.qrc">:/cartas/cartas1/cartasRivalesVer.png</pixmap>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>1310</x>
-     <y>50</y>
-     <width>121</width>
-     <height>611</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="../Imagenes/imagenes.qrc">:/cartas/cartas1/cartasRivalesVer.png</pixmap>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
@@ -406,8 +355,6 @@
   <zorder>botonJugar</zorder>
   <zorder>botonCambiar7</zorder>
   <zorder>carta_triunfo</zorder>
-  <zorder>label</zorder>
-  <zorder>label_4</zorder>
   <zorder>boton_enviar_chat</zorder>
   <zorder>chat_box</zorder>
   <zorder>text_chat</zorder>

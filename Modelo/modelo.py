@@ -1,12 +1,14 @@
 class modelo_tablero:
     def __init__(self):
-        self.cartas_jugadas = [None, None]
+        self.cartas_jugadas = [None, None, None, None]
         self.mis_cartas = [None, None, None, None, None, None]
         self.cartas_posibles = []
         self.carta_triunfo = None
         self.num_jugador = 0
-        self.jugador0 = "Jugador 1"
-        self.jugador1 = "Jugador 2"
+        self.jugador0 = "Esperando..."
+        self.jugador1 = "Esperando..."
+        self.jugador2 = "Esperando..."
+        self.jugador3 = "Esperando..."
 
     def set_mano(self, cartas):
         if len(cartas) == len(self.mis_cartas):    
@@ -39,10 +41,19 @@ class modelo_tablero:
     def set_carta_jugada(self, jugador, carta):
         if jugador == 0:
             self.cartas_jugadas[0] = carta
-        else:
+        elif jugador == 1:
             self.cartas_jugadas[1] = carta
+        elif jugador == 2:
+            self.cartas_jugadas[2] = carta
+        else:
+            self.cartas_jugadas[3] = carta
 
-    def set_jugadores(self, jugador0, jugador1):
+    def set_jugadores(self, jugador0, jugador1, jugador2, jugador3):
         self.jugador0 = jugador0
         if jugador1 != None:
             self.jugador1 = jugador1
+        if jugador2 != None:
+            self.jugador2 = jugador2
+        if jugador3 != None:
+            self.jugador3 = jugador3
+        

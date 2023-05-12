@@ -1,6 +1,7 @@
 import sys
 import requests
 import json
+import subprocess
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QStackedWidget, QWidget, QVBoxLayout
 from Interfaces.login import Ui_login
@@ -74,8 +75,11 @@ class login_implementacion(QMainWindow):
                 mensaje.exec_()
 
             elif response.status_code == 200:
-                mensaje.setText("Loggeado")
-                mensaje.exec_()
+                #mensaje.setText("Loggeado")
+                #mensaje.exec_()
+                self.close()
+                subprocess.call(["python", "Interfaces/menu.py"])
+                #sys.exit()
                 
     
     def cambioPantallaRegistro(self):

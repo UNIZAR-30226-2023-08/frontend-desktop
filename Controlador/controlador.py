@@ -8,10 +8,11 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import QObject, pyqtSignal, QMetaObject
 
 class Controlador(object):
-    def __init__(self, modelo: modelo_tablero, vista, username):
+    def __init__(self, modelo: modelo_tablero, vista, username, num_jug):
         self.modelo = modelo
         self.vista = vista
         self.username = username
+        self.num_jugadores = num_jug
         self.sala_espera = True
         self.direccion_socket_chat = "ws://localhost:8000/ws/"
         threading.Thread(target=self.iniciarSocket).start()
@@ -27,6 +28,9 @@ class Controlador(object):
     def jugar_carta(self, posicion):
         carta = self.modelo.get_carta(posicion)
         self.ws.send(carta)
+
+    def cambiar7(self, decision):
+        self.ws.send(decision)
         
     def on_open(self, ws):
         print("Conexión creada")
@@ -69,17 +73,48 @@ class Controlador(object):
                     self.modelo.set_carta_jugada(0,carta[0] + "-" + str(carta[1]))
                 else:
                     self.modelo.set_carta_jugada(0, "no_hay_foto")
+
                 #Carta jugador 2
                 carta = mensaje["1"]
                 if carta != None:
                     self.modelo.set_carta_jugada(1,carta[0] + "-" + str(carta[1]))
                 else:
                     self.modelo.set_carta_jugada(1, "no_hay_foto")
+
+                #Carta jugador 3
+                if "2" in mensaje:
+                    carta = mensaje["2"]
+                    if carta != None:
+                        self.modelo.set_carta_jugada(2,carta[0] + "-" + str(carta[1]))
+                    else:
+                        self.modelo.set_carta_jugada(2, "no_hay_foto")
+
+                #Carta jugador 4
+                if "3" in mensaje:
+                    carta = mensaje["3"]
+                    if carta != None:
+                        self.modelo.set_carta_jugada(3,carta[0] + "-" + str(carta[1]))
+                    else:
+                        self.modelo.set_carta_jugada(3, "no_hay_foto")
+
+                
+                #Mostrar cartas en la vista
                 self.vista.mostrar_cartas_jugadas(self.modelo, self.num_jugador)
+
             else:
                 jugador0 = mensaje["0"]
                 jugador1 = mensaje["1"]
-                self.modelo.set_jugadores(jugador0, jugador1)
+                if "2" in mensaje:
+                    jugador2 = mensaje["2"]
+                else:
+                    jugador2 = None
+
+                if "3" in mensaje:
+                    jugador3 = mensaje["3"]
+                else:
+                    jugador3 = None
+
+                self.modelo.set_jugadores(jugador0, jugador1, jugador2, jugador3)
                 self.vista.mostrar_jugadores_sala_espera(self.modelo)
 
         if "Ganador" in mensaje:
@@ -92,8 +127,7 @@ class Controlador(object):
             threading.Thread(target=self.iniciar_socket_chat).start()
 
         if "Cambiar7" == mensaje:
-            self.ws.send("False")
-            #Acabar
+            self.vista.puede_cambiar()
 
         if "Comienza partida" == mensaje:
             self.sala_espera = False
@@ -107,7 +141,7 @@ class Controlador(object):
 
     def iniciarSocket(self):
         #websocket.enableTrace(True)
-        self.ws = websocket.WebSocketApp("ws://localhost:8000/partida2/" + self.username,
+        self.ws = websocket.WebSocketApp("ws://localhost:8000/partida" + str(self.num_jugadores) + "/" + self.username,
                                     on_open=self.on_open,
                                     on_message=self.gestor_mensajes,
                                     on_error=self.on_error,
