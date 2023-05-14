@@ -78,8 +78,6 @@ class tablero_implementacion(QMainWindow):
         QtCore.QMetaObject.invokeMethod(self.stacked_widget, "setCurrentWidget", QtCore.Qt.QueuedConnection, QtCore.Q_ARG(QWidget, self.tablero_widget))
         self.stacked_widget.setMaximumSize(1500, 1000)
         
-        #self.rellenarMiMano()
-        #self.mostrarTriunfo()
         
     def set_cartas_posibles(self, modelo: modelo_tablero):
         self.num_cartas_posibles = modelo.get_num_cartas_posibles()

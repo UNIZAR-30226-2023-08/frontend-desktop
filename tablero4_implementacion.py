@@ -25,6 +25,7 @@ class tablero_implementacion(QMainWindow):
     def inicializarGUI(self):
         #Crear un objeto QStackedWidget
         self.stacked_widget = QStackedWidget()
+        self.stacked_widget.setMaximumSize(706, 497)
 
         #Crear los widgets que se desean agregar al QStacketWidget
         self.sala_espera_widget = QWidget()
@@ -86,9 +87,7 @@ class tablero_implementacion(QMainWindow):
 
     def pantalla_tablero(self):
         QtCore.QMetaObject.invokeMethod(self.stacked_widget, "setCurrentWidget", QtCore.Qt.QueuedConnection, QtCore.Q_ARG(QWidget, self.tablero_widget))
-        
-        #self.rellenarMiMano()
-        #self.mostrarTriunfo()
+        self.stacked_widget.setMaximumSize(1500, 1000)
         
     def set_cartas_posibles(self, modelo: modelo_tablero):
         self.num_cartas_posibles = modelo.get_num_cartas_posibles()
