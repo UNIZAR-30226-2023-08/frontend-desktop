@@ -1,5 +1,6 @@
 import sys
 import requests
+import subprocess
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QStackedWidget, QWidget, QVBoxLayout, QStyleFactory
 from PyQt5.QtGui import QColor
@@ -8,11 +9,12 @@ from Interfaces.menuInicial import Ui_menu_inicial
 from Interfaces.estadisticas import Ui_estadisticas
 
 class menu_implementacion(QMainWindow):
-    def __init__(self, access_token) -> None:
+    def __init__(self, access_token, username) -> None:
         super().__init__()
 
         self.inicializarGUI()
         self.token = access_token
+        self.username = username
 
     def inicializarGUI(self):
         #Crear un objeto QStackedWidget
@@ -52,6 +54,15 @@ class menu_implementacion(QMainWindow):
         self.ui_menu_inicial.boton_estadisticas.clicked.connect(self.pantalla_estadisticas)
         self.ui_buscar_partida.boton_volver.clicked.connect(self.pantalla_inicial)
         self.ui_estadisticas.boton_volver.clicked.connect(self.pantalla_inicial)
+        self.ui_buscar_partida.comboBox.currentIndexChanged.connect(self.seleccionar_tipo_partida)
+        self.ui_buscar_partida.boton_buscar_publica.clicked.connect(self.buscar_partida_publica)
+        self.ui_buscar_partida.boton_crear_privada.clicked.connect(self.crear_partida_privada)
+        self.ui_buscar_partida.boton_ingresar_privada.clicked.connect(self.ingresar_partida_privada)
+        self.ui_buscar_partida.boton_crear_torneo.clicked.connect(self.crear_torneo)
+        self.ui_buscar_partida.boton_ingresar_torneo.clicked.connect(self.ingresar_torneo)
+
+        #Inicializar estado botones
+        self.activar_botones_menu(False)
         
         # Aplicar estilo Fusion
         style = QStyleFactory.create('Fusion')
@@ -81,6 +92,7 @@ class menu_implementacion(QMainWindow):
 
     def pantalla_inicial(self):
         self.stacked_widget.setCurrentWidget(self.menu_inicial_widget)
+        self.ui_estadisticas.listWidget.clear()
         
     def rellenar_pantalla_estadisticas(self):
         self.rellenarEstadisticas()
@@ -88,11 +100,11 @@ class menu_implementacion(QMainWindow):
 
     def rellenarEstadisticas(self):
         headers = {'Authorization': f'Bearer ' + self.token}
-        response = requests.get('http://localhost:8000/users/me', headers=headers)
+        response = requests.get('http://guinote-unizar.onrender.com/users/me', headers=headers)
         response_parsed = response.json()
         nombre_usuario = response_parsed['username']
-        victorias = int(response_parsed['winMatches'])
-        derrotas = int(response_parsed['looseMatches'])
+        victorias = int(response_parsed['wonMatches'])
+        derrotas = int(response_parsed['lostMatches'])
         lp = response_parsed['lp']
         if victorias == 0 and derrotas == 0:
             ratio = "N/A"
@@ -109,20 +121,77 @@ class menu_implementacion(QMainWindow):
     def rellenarRanking(self):
         parametros = {'limite_lista': 10}
         headers = {'Authorization': f'Bearer ' + self.token}
-        response = requests.get('http://localhost:8000/ranking', headers=headers,params=parametros)
+        response = requests.get('http://guinote-unizar.onrender.com/ranking', headers=headers,params=parametros)
         response_parsed = response.json()
 
         ranking = response_parsed
 
         for jugador in ranking:
-            self.ui_estadisticas.listWidget.addItem(f" Usuario: {jugador['username']}: {jugador['lp']} puntos  Victorias: {jugador['winMatches']}  Derrotas: {jugador['looseMatches']}")
+            self.ui_estadisticas.listWidget.addItem(f" Usuario: {jugador['username']}: {jugador['lp']} puntos  Victorias: {jugador['wonMatches']}  Derrotas: {jugador['lostMatches']}")
+
+    def seleccionar_tipo_partida(self):
+        text = self.ui_buscar_partida.comboBox.currentText()
+        if text == "Elige tipo de partida":
+            self.activar_botones_menu(False)
+        elif text == "Partida 2 jugadores":
+            self.activar_botones_menu(True)
+        elif text == "Partida 3 jugadores":
+            self.activar_botones_menu(True)
+            self.ui_buscar_partida.boton_crear_torneo.setEnabled(False)
+            self.ui_buscar_partida.boton_ingresar_torneo.setEnabled(False)
+        elif text == "Partida 4 jugadores":
+            self.activar_botones_menu(True)
+            self.ui_buscar_partida.boton_crear_torneo.setEnabled(False)
+            self.ui_buscar_partida.boton_ingresar_torneo.setEnabled(False)
+    
+    def activar_botones_menu(self, activar):
+        self.ui_buscar_partida.boton_buscar_publica.setEnabled(activar)
+        self.ui_buscar_partida.boton_crear_privada.setEnabled(activar)
+        self.ui_buscar_partida.boton_ingresar_privada.setEnabled(activar)
+        self.ui_buscar_partida.boton_crear_torneo.setEnabled(activar)
+        self.ui_buscar_partida.boton_ingresar_torneo.setEnabled(activar)
+
+    def buscar_partida_publica(self):
+        text = self.ui_buscar_partida.comboBox.currentText()
+        if text == "Partida 2 jugadores":
+            subprocess.call(["python", "tablero2_implementacion.py", self.username, "publica", ""])
+        elif text == "Partida 3 jugadores":
+            subprocess.call(["python", "tablero3_implementacion.py", self.username, "publica", ""])
+        elif text == "Partida 4 jugadores":
+            subprocess.call(["python", "tablero4_implementacion.py", self.username, "publica", ""])
+
+    def crear_partida_privada(self):
+        text = self.ui_buscar_partida.comboBox.currentText()
+        if text == "Partida 2 jugadores":
+            subprocess.call(["python", "tablero2_implementacion.py", self.username, "privada", "crear"])
+        elif text == "Partida 3 jugadores":
+            subprocess.call(["python", "tablero3_implementacion.py", self.username, "privada", "crear"])
+        elif text == "Partida 4 jugadores":
+            subprocess.call(["python", "tablero4_implementacion.py", self.username, "privada", "crear"])
+            
+    def ingresar_partida_privada(self):
+        text = self.ui_buscar_partida.comboBox.currentText()
+        codigo = self.ui_buscar_partida.codigo_privada.text()
+        if text == "Partida 2 jugadores":
+            subprocess.call(["python", "tablero2_implementacion.py", self.username, "privada", codigo])
+        elif text == "Partida 3 jugadores":
+            subprocess.call(["python", "tablero3_implementacion.py", self.username, "privada", codigo])
+        elif text == "Partida 4 jugadores":
+            subprocess.call(["python", "tablero4_implementacion.py", self.username, "privada", codigo])
+
+    def crear_torneo(self):
+        pass
+    def ingresar_torneo(self):
+        pass
 
         
     # def pantalla_tienda(self):
         
 def main():
     app = QApplication(sys.argv)
-    ventana = menu_implementacion(sys.argv[1])
+    token = sys.argv[1]
+    username = sys.argv[2]
+    ventana = menu_implementacion(token, username)
     ventana.show()
 
     sys.exit(app.exec_())

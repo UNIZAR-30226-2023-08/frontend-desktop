@@ -36,7 +36,7 @@
    <property name="geometry">
     <rect>
      <x>210</x>
-     <y>20</y>
+     <y>0</y>
      <width>294</width>
      <height>39</height>
     </rect>
@@ -332,6 +332,24 @@ border-color: rgb(0, 0, 0);</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>291</x>
+     <y>50</y>
+     <width>121</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources>

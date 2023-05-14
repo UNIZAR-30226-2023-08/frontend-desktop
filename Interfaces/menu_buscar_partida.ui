@@ -125,7 +125,7 @@ border-color: rgb(0, 0, 0);</string>
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QPushButton" name="boton_confirmar_registro">
+        <widget class="QPushButton" name="boton_buscar_publica">
          <property name="geometry">
           <rect>
            <x>30</x>
@@ -233,7 +233,7 @@ border-color: rgb(0, 0, 0);</string>
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QPushButton" name="boton_confirmar_registro_3">
+        <widget class="QPushButton" name="boton_crear_privada">
          <property name="geometry">
           <rect>
            <x>30</x>
@@ -257,7 +257,7 @@ border-color: rgb(0, 0, 0);</string>
           <string>Crear Partida</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="boton_confirmar_registro_4">
+        <widget class="QPushButton" name="boton_ingresar_privada">
          <property name="geometry">
           <rect>
            <x>60</x>
@@ -281,7 +281,7 @@ border-color: rgb(0, 0, 0);</string>
           <string>Introducir</string>
          </property>
         </widget>
-        <widget class="QLineEdit" name="text_nombre_real">
+        <widget class="QLineEdit" name="codigo_privada">
          <property name="geometry">
           <rect>
            <x>20</x>
@@ -291,6 +291,9 @@ border-color: rgb(0, 0, 0);</string>
           </rect>
          </property>
          <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
           <string>Introduce código</string>
          </property>
         </widget>
@@ -334,28 +337,6 @@ border-color: rgb(0, 0, 0);</string>
           <height>125</height>
          </size>
         </property>
-        <widget class="QSpinBox" name="spinBox">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>50</y>
-           <width>191</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="suffix">
-          <string> jugadores</string>
-         </property>
-         <property name="prefix">
-          <string>Partida </string>
-         </property>
-         <property name="minimum">
-          <number>2</number>
-         </property>
-         <property name="maximum">
-          <number>4</number>
-         </property>
-        </widget>
         <widget class="QLabel" name="label_3">
          <property name="geometry">
           <rect>
@@ -372,8 +353,36 @@ border-color: rgb(0, 0, 0);</string>
           <string/>
          </property>
         </widget>
-        <zorder>label_3</zorder>
-        <zorder>spinBox</zorder>
+        <widget class="QComboBox" name="comboBox">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>50</y>
+           <width>191</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <item>
+          <property name="text">
+           <string>Elige tipo de partida</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Partida 2 jugadores</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Partida 3 jugadores</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Partida 4 jugadores</string>
+          </property>
+         </item>
+        </widget>
        </widget>
       </item>
       <item>
@@ -404,7 +413,7 @@ border-color: rgb(0, 0, 0);</string>
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QPushButton" name="boton_confirmar_registro_5">
+        <widget class="QPushButton" name="boton_crear_torneo">
          <property name="geometry">
           <rect>
            <x>30</x>
@@ -425,10 +434,10 @@ border-color: rgb(0, 0, 0);</string>
           <string notr="true">background-color: rgb(255, 255, 0);</string>
          </property>
          <property name="text">
-          <string>Unirse a un torneo</string>
+          <string>Crear Torneo</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="boton_confirmar_registro_6">
+        <widget class="QPushButton" name="boton_ingresar_torneo">
          <property name="geometry">
           <rect>
            <x>60</x>
@@ -452,7 +461,7 @@ border-color: rgb(0, 0, 0);</string>
           <string>Introducir</string>
          </property>
         </widget>
-        <widget class="QLineEdit" name="text_nombre_real_2">
+        <widget class="QLineEdit" name="codigo_torneo">
          <property name="geometry">
           <rect>
            <x>20</x>
@@ -462,6 +471,9 @@ border-color: rgb(0, 0, 0);</string>
           </rect>
          </property>
          <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
           <string>Introduce código</string>
          </property>
         </widget>

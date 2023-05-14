@@ -4,7 +4,6 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QStackedWidg
 from PyQt5 import QtGui, QtCore
 from Interfaces.tablero4 import Ui_tablero4
 from Interfaces.salaEspera4 import Ui_sala_espera4
-from Interfaces.clickableLabel import ClickableLabel
 from Controlador.controlador import Controlador
 from Modelo.modelo import modelo_tablero
 
@@ -13,15 +12,14 @@ class tablero_implementacion(QMainWindow):
     cartaSeleccionada = None
     num_cartas_posibles = []
     posicones = [0, 1, 2, 3]
-    puede_cantar = False
 
-    def __init__(self, username) -> None:
+    def __init__(self, username, tipo, codigo) -> None:
         super().__init__()
         self.username = username
         modelo = modelo_tablero()
         self.inicializarGUI()
         num_jugadores = 4
-        self.controlador = Controlador(modelo, self, username, num_jugadores)
+        self.controlador = Controlador(modelo, self, username, num_jugadores, tipo, codigo)
         
     
     def inicializarGUI(self):
@@ -92,6 +90,8 @@ class tablero_implementacion(QMainWindow):
         #self.rellenarMiMano()
         #self.mostrarTriunfo()
         
+    def set_cartas_posibles(self, modelo: modelo_tablero):
+        self.num_cartas_posibles = modelo.get_num_cartas_posibles()
 
     def seleccionarCarta(self, numCarta, carta):
         if self.cartaSeleccionada != None:
@@ -99,7 +99,14 @@ class tablero_implementacion(QMainWindow):
         self.cartaSeleccionada = carta
         self.numCartaSeleccionada = numCarta - 1
         self.cartaSeleccionada.setStyleSheet("border: 2px solid red;")
-        if self.jugada_posible:
+
+        print(self.num_cartas_posibles)
+        if self.numCartaSeleccionada in self.num_cartas_posibles:
+            carta_posible = True
+        else:
+            carta_posible = False
+
+        if self.jugada_posible and carta_posible:
             self.ui_tablero.botonJugar.setEnabled(True)
 
     def puede_jugar(self, puede, num_cartas_posibles):
@@ -118,33 +125,127 @@ class tablero_implementacion(QMainWindow):
     def cambiar7(self):
         self.controlador.cambiar7("True")
 
+    def mostrar_nombres_jugadores(self, modelo: modelo_tablero, jugador):
+        if jugador == 0:
+            self.ui_tablero.nombre_jugador0.setText(modelo.jugador0)
+            self.ui_tablero.nombre_jugador1.setText(modelo.jugador1)
+            self.ui_tablero.nombre_jugador2.setText(modelo.jugador2)
+            self.ui_tablero.nombre_jugador3.setText(modelo.jugador3)
+        elif jugador == 1:
+            self.ui_tablero.nombre_jugador0.setText(modelo.jugador1)
+            self.ui_tablero.nombre_jugador1.setText(modelo.jugador2)
+            self.ui_tablero.nombre_jugador2.setText(modelo.jugador3)
+            self.ui_tablero.nombre_jugador3.setText(modelo.jugador0)
+        elif jugador == 2:
+            self.ui_tablero.nombre_jugador0.setText(modelo.jugador2)
+            self.ui_tablero.nombre_jugador1.setText(modelo.jugador3)
+            self.ui_tablero.nombre_jugador2.setText(modelo.jugador0)
+            self.ui_tablero.nombre_jugador3.setText(modelo.jugador1)
+        else:
+            self.ui_tablero.nombre_jugador0.setText(modelo.jugador3)
+            self.ui_tablero.nombre_jugador1.setText(modelo.jugador0)
+            self.ui_tablero.nombre_jugador2.setText(modelo.jugador1)
+            self.ui_tablero.nombre_jugador3.setText(modelo.jugador2)
+
     def mostrar_cartas_jugadas(self, modelo: modelo_tablero, jugador):
+        pixmap = QtGui.QPixmap(":/logo/Tapete_verde.jpg").scaled(100, 200)
+        pixmap.fill(QtCore.Qt.transparent)
         posiciones_rotadas = self.posicones[jugador:] + self.posicones[:jugador]
         print(posiciones_rotadas)
 
-        self.ui_tablero.carta_jugada1.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.cartas_jugadas[posiciones_rotadas[0]] + ".png").scaled(100,200))
-        self.ui_tablero.carta_jugada2.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.cartas_jugadas[posiciones_rotadas[1]] + ".png").scaled(100,200))
-        self.ui_tablero.carta_jugada3.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.cartas_jugadas[posiciones_rotadas[2]] + ".png").scaled(100,200))
-        self.ui_tablero.carta_jugada4.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.cartas_jugadas[posiciones_rotadas[3]] + ".png").scaled(100,200))
-            
+        if modelo.cartas_jugadas[posiciones_rotadas[0]] != "":
+            self.ui_tablero.carta_jugada1.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.cartas_jugadas[posiciones_rotadas[0]] + ".png").scaled(100,200))
+        else:
+            self.ui_tablero.carta_jugada1.setPixmap(pixmap)
+        
+        if modelo.cartas_jugadas[posiciones_rotadas[1]] != "":
+            self.ui_tablero.carta_jugada2.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.cartas_jugadas[posiciones_rotadas[1]] + ".png").scaled(100,200))
+        else:
+            self.ui_tablero.carta_jugada2.setPixmap(pixmap)
+
+        if modelo.cartas_jugadas[posiciones_rotadas[2]] != "":
+            self.ui_tablero.carta_jugada3.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.cartas_jugadas[posiciones_rotadas[2]] + ".png").scaled(100,200))
+        else:
+            self.ui_tablero.carta_jugada3.setPixmap(pixmap)
+
+        if modelo.cartas_jugadas[posiciones_rotadas[3]] != "":
+            self.ui_tablero.carta_jugada4.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.cartas_jugadas[posiciones_rotadas[3]] + ".png").scaled(100,200))
+        else:
+            self.ui_tablero.carta_jugada4.setPixmap(pixmap)
 
     def rellenarMiMano(self, modelo: modelo_tablero):
         self.ui_tablero.botonCambiar7.setEnabled(False)
-        self.ui_tablero.carta1.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.mis_cartas[0] + ".png"))
-        self.ui_tablero.carta2.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.mis_cartas[1] + ".png"))
-        self.ui_tablero.carta3.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.mis_cartas[2] + ".png"))
-        self.ui_tablero.carta4.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.mis_cartas[3] + ".png"))
-        self.ui_tablero.carta5.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.mis_cartas[4] + ".png"))
-        self.ui_tablero.carta6.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.mis_cartas[5] + ".png"))
+        pixmap = QtGui.QPixmap(":/logo/Tapete_verde.jpg").scaled(118, 260)
+        pixmap.fill(QtCore.Qt.transparent)
+        
+        #Carta 0
+        if modelo.mis_cartas[0] != "":
+            self.ui_tablero.carta1.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.mis_cartas[0] + ".png"))
+        else:
+            print("X")
+            self.ui_tablero.carta1.setPixmap(pixmap)
+        
+        #Carta 1
+        if modelo.mis_cartas[1] != "":
+            self.ui_tablero.carta2.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.mis_cartas[1] + ".png"))
+        else:
+            print("Xx")
+            self.ui_tablero.carta2.setPixmap(pixmap)
+        
+        #Carta 2
+        if modelo.mis_cartas[2] != "":
+            self.ui_tablero.carta3.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.mis_cartas[2] + ".png"))
+        else:
+            print("XXX")
+            self.ui_tablero.carta3.setPixmap(pixmap)
+        
+        #Carta 3
+        if modelo.mis_cartas[3] != "":
+            self.ui_tablero.carta4.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.mis_cartas[3] + ".png"))
+        else:
+            print("XXXX")
+            self.ui_tablero.carta4.setPixmap(pixmap)
+        
+        #Carta 4
+        if modelo.mis_cartas[4] != "":
+            self.ui_tablero.carta5.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.mis_cartas[4] + ".png"))
+        else:
+            print("XXXXX")
+            self.ui_tablero.carta5.setPixmap(pixmap)
+        
+        #Carta 5
+        if modelo.mis_cartas[5] != "":
+            self.ui_tablero.carta6.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.mis_cartas[5] + ".png"))
+        else:
+            print("XXXXXX")
+            self.ui_tablero.carta6.setPixmap(pixmap)
 
     def mostrarTriunfo(self, modelo: modelo_tablero):
         pm = QtGui.QPixmap(":/cartas/cartas1/" + modelo.carta_triunfo + ".png")
         t = QtGui.QTransform()
         t.rotate(-90)
         self.ui_tablero.carta_triunfo.setPixmap(pm.transformed(t))
+        self.ui_tablero.label_3.setPixmap(QtGui.QPixmap(":/cartas/cartas1/dorso.png"))
+    
+    def arrastre(self):
+        pixmap = QtGui.QPixmap()
+        pixmap.fill(QtCore.Qt.transparent)
+        self.ui_tablero.carta_triunfo.setPixmap(pixmap)
+        self.ui_tablero.label_3.setPixmap(pixmap)
 
+    def ganador_partida(self, ganador):
+        mensaje = QMessageBox(self)
+        mensaje.setWindowTitle("Ganador")
+        if ganador == True:
+            mensaje.setText("Has ganado la partida")
+        else:
+            mensaje.setText("Has perdido la partida")
+        mensaje.exec_()
+        sys.exit()
 
-
+    def mostrar_codigo(self, codigo):
+        self.ui_sala_espera.label_codigo.setText("Código: " + str(codigo))
+            
     def mostrar_mensaje(self, usuario, mensaje):
         self.ui_tablero.chat_box.append(usuario + ": " + mensaje)
 
@@ -158,8 +259,10 @@ class tablero_implementacion(QMainWindow):
 
 def main():
     username = sys.argv[1]
+    tipo = sys.argv[2]
+    codigo = sys.argv[3]
     app = QApplication(sys.argv)
-    ventana = tablero_implementacion(username)
+    ventana = tablero_implementacion(username, tipo, codigo)
     ventana.show()
     sys.exit(app.exec_())
 

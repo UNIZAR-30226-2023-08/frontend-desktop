@@ -12,8 +12,8 @@ class login_implementacion(QMainWindow):
         super().__init__()
 
         self.inicializarGUI()
-        self.rutaPeticiones = 'http://localhost:8000'
-
+        #self.rutaPeticiones = 'http://localhost:8000'
+        self.rutaPeticiones = 'http://guinote-unizar.onrender.com'
 
     def inicializarGUI(self):
         #Crear un objeto QStackedWidget
@@ -76,7 +76,7 @@ class login_implementacion(QMainWindow):
 
             elif response.status_code == 200:
                 self.close()
-                subprocess.call(["python", "menu_implementacion.py", response_parsed["access_token"]])
+                subprocess.call(["python", "menu_implementacion.py", response_parsed["access_token"], nombre_usuario])
                 
     
     def cambioPantallaRegistro(self):

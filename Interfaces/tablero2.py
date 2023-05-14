@@ -32,6 +32,11 @@ class Ui_tablero2(object):
         self.verticalLayoutCentral.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
         self.verticalLayoutCentral.setContentsMargins(0, 0, 0, 0)
         self.verticalLayoutCentral.setObjectName("verticalLayoutCentral")
+        self.nombre_jugador1 = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.nombre_jugador1.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.nombre_jugador1.setAlignment(QtCore.Qt.AlignCenter)
+        self.nombre_jugador1.setObjectName("nombre_jugador1")
+        self.verticalLayoutCentral.addWidget(self.nombre_jugador1)
         self.label_2 = QtWidgets.QLabel(self.verticalLayoutWidget)
         self.label_2.setMaximumSize(QtCore.QSize(16777215, 200))
         self.label_2.setStyleSheet("")
@@ -137,6 +142,7 @@ class Ui_tablero2(object):
         self.label_5.setGeometry(QtCore.QRect(0, -91, 1500, 1200))
         self.label_5.setText("")
         self.label_5.setPixmap(QtGui.QPixmap(":/logo/Tapete_verde.jpg"))
+        self.label_5.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_5.setObjectName("label_5")
         self.boton_enviar_chat = QtWidgets.QPushButton(tablero2)
         self.boton_enviar_chat.setGeometry(QtCore.QRect(190, 900, 89, 25))
@@ -148,6 +154,10 @@ class Ui_tablero2(object):
         self.text_chat = QtWidgets.QLineEdit(tablero2)
         self.text_chat.setGeometry(QtCore.QRect(20, 860, 261, 25))
         self.text_chat.setObjectName("text_chat")
+        self.nombre_jugador0 = QtWidgets.QLabel(tablero2)
+        self.nombre_jugador0.setGeometry(QtCore.QRect(650, 960, 200, 17))
+        self.nombre_jugador0.setAlignment(QtCore.Qt.AlignCenter)
+        self.nombre_jugador0.setObjectName("nombre_jugador0")
         self.label_5.raise_()
         self.horizontalLayoutWidget.raise_()
         self.verticalLayoutWidget.raise_()
@@ -157,14 +167,17 @@ class Ui_tablero2(object):
         self.boton_enviar_chat.raise_()
         self.chat_box.raise_()
         self.text_chat.raise_()
+        self.nombre_jugador0.raise_()
 
         self.retranslateUi(tablero2)
         QtCore.QMetaObject.connectSlotsByName(tablero2)
 
     def retranslateUi(self, tablero2):
         _translate = QtCore.QCoreApplication.translate
+        self.nombre_jugador1.setText(_translate("tablero2", "TextLabel"))
         self.botonJugar.setText(_translate("tablero2", "Jugar"))
         self.botonCambiar7.setText(_translate("tablero2", "Cambiar 7"))
         self.boton_enviar_chat.setText(_translate("tablero2", "Enviar"))
         self.text_chat.setPlaceholderText(_translate("tablero2", "Escribe aquí"))
+        self.nombre_jugador0.setText(_translate("tablero2", "TextLabel"))
 import Imagenes.imagenes_rc

@@ -53,6 +53,22 @@
      <enum>QLayout::SetDefaultConstraint</enum>
     </property>
     <item>
+     <widget class="QLabel" name="nombre_jugador1">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QLabel" name="label_2">
       <property name="maximumSize">
        <size>
@@ -309,6 +325,9 @@
    <property name="pixmap">
     <pixmap resource="../Imagenes/imagenes.qrc">:/logo/Tapete_verde.jpg</pixmap>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
   </widget>
   <widget class="QPushButton" name="boton_enviar_chat">
    <property name="geometry">
@@ -349,6 +368,22 @@
     <string>Escribe aquí</string>
    </property>
   </widget>
+  <widget class="QLabel" name="nombre_jugador0">
+   <property name="geometry">
+    <rect>
+     <x>650</x>
+     <y>960</y>
+     <width>200</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
   <zorder>label_5</zorder>
   <zorder>horizontalLayoutWidget</zorder>
   <zorder>verticalLayoutWidget</zorder>
@@ -358,6 +393,7 @@
   <zorder>boton_enviar_chat</zorder>
   <zorder>chat_box</zorder>
   <zorder>text_chat</zorder>
+  <zorder>nombre_jugador0</zorder>
  </widget>
  <resources>
   <include location="../Imagenes/imagenes.qrc"/>

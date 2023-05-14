@@ -19,7 +19,8 @@ class modelo_tablero:
                 self.mis_cartas[i] = cartas[i]
 
             for j in range(i+1,6):
-                self.mis_cartas[j] = "vacia"
+                self.mis_cartas[j] = ""
+        self.set_cartas_posibles(cartas)
 
     def set_cartas_posibles(self, cartas):
         self.cartas_posibles = cartas

@@ -310,7 +310,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>40</x>
      <y>50</y>
      <width>121</width>
      <height>611</height>
@@ -394,6 +394,57 @@
     <string>Escribe aquí</string>
    </property>
   </widget>
+  <widget class="QLabel" name="nombre_jugador0">
+   <property name="geometry">
+    <rect>
+     <x>650</x>
+     <y>960</y>
+     <width>200</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="nombre_jugador2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>660</y>
+     <width>200</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="nombre_jugador1">
+   <property name="geometry">
+    <rect>
+     <x>1270</x>
+     <y>670</y>
+     <width>200</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
   <zorder>label_5</zorder>
   <zorder>horizontalLayoutWidget</zorder>
   <zorder>verticalLayoutWidget</zorder>
@@ -405,6 +456,9 @@
   <zorder>boton_enviar_chat</zorder>
   <zorder>chat_box</zorder>
   <zorder>text_chat</zorder>
+  <zorder>nombre_jugador0</zorder>
+  <zorder>nombre_jugador2</zorder>
+  <zorder>nombre_jugador1</zorder>
  </widget>
  <resources>
   <include location="../Imagenes/imagenes.qrc"/>
