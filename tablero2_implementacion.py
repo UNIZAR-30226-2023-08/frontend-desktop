@@ -206,7 +206,7 @@ class tablero_implementacion(QMainWindow):
         else:
             mensaje.setText("Has perdido la partida")
         mensaje.exec_()
-        sys.exit()
+        QtCore.QMetaObject.invokeMethod(self, "close", QtCore.Qt.QueuedConnection)
 
     def mostrar_codigo(self, codigo):
         self.ui_sala_espera.label_codigo.setText("Código: " + str(codigo))

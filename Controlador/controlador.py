@@ -131,11 +131,18 @@ class Controlador(object):
                 self.vista.mostrar_nombres_jugadores(self.modelo, self.num_jugador)
 
         if "Ganador Partida" in mensaje:
+            self.cerrar_websockets()
             ganador = mensaje["Ganador Partida"]
-            if ganador == self.num_jugador:
-                self.vista.ganador_partida(True)
+            if self.num_jugadores != 4:
+                if ganador == self.num_jugador:
+                    self.vista.ganador_partida(True)
+                else:
+                    self.vista.ganador_partida(False)
             else:
-                self.vista.ganador_partida(False)
+                if self.num_jugador in ganador:
+                    self.vista.ganador_partida(True)
+                else:
+                    self.vista.ganador_partida(False)
 
         if "chat" in mensaje:
             idChat = mensaje["chat"]
@@ -167,7 +174,7 @@ class Controlador(object):
     def iniciarSocket(self):
         #websocket.enableTrace(True)
         if self.tipo == "publica":
-            self.ws = websocket.WebSocketApp("ws://localhost:8000/partida" + str(self.num_jugadores) + "/" + self.username,
+            self.ws = websocket.WebSocketApp("wss://guinote-unizar.onrender.com/partida" + str(self.num_jugadores) + "/" + self.username,
                                         on_open=self.on_open,
                                         on_message=self.gestor_mensajes,
                                         on_error=self.on_error,
@@ -175,12 +182,12 @@ class Controlador(object):
         
         if self.tipo == "privada":
             if self.codigo == "crear":
-                response = requests.post("http://localhost:8000/crear/partida" + str(self.num_jugadores))
+                response = requests.post("https://guinote-unizar.onrender.com/crear/partida" + str(self.num_jugadores))
                 response_parsed = response.json()
                 self.vista.mostrar_codigo(response_parsed["codigo"])
                 self.codigo = response_parsed["codigo"]
 
-            self.ws = websocket.WebSocketApp("ws://localhost:8000/partida" + str(self.num_jugadores) + "/join/" + self.username + "/" + self.codigo,
+            self.ws = websocket.WebSocketApp("wss://guinote-unizar.onrender.com/partida" + str(self.num_jugadores) + "/join/" + self.username + "/" + self.codigo,
                                         on_open=self.on_open,
                                         on_message=self.gestor_mensajes,
                                         on_error=self.on_error,
@@ -214,3 +221,6 @@ class Controlador(object):
                                               on_close=self.on_close)
         self.ws_chat.run_forever()
     
+    def cerrar_websockets(self):
+        self.ws.close()
+        self.ws_chat.close()

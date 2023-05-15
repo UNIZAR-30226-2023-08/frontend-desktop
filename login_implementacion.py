@@ -13,7 +13,7 @@ class login_implementacion(QMainWindow):
 
         self.inicializarGUI()
         #self.rutaPeticiones = 'http://localhost:8000'
-        self.rutaPeticiones = 'http://guinote-unizar.onrender.com'
+        self.rutaPeticiones = 'https://guinote-unizar.onrender.com'
 
     def inicializarGUI(self):
         #Crear un objeto QStackedWidget
