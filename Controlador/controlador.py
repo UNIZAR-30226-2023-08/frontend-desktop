@@ -16,7 +16,7 @@ class Controlador(object):
         self.tipo = tipo
         self.codigo = codigo
         self.sala_espera = True
-        self.direccion_socket_chat = "ws://localhost:8000/ws/"
+        self.direccion_socket_chat = "wss://guinote-unizar.onrender.com/ws/"
         threading.Thread(target=self.iniciarSocket).start()
 
 
@@ -49,8 +49,9 @@ class Controlador(object):
             self.vista.rellenarMiMano(self.modelo)
             self.vista.set_cartas_posibles(self.modelo)
             
-        if "Cartas posibles" in mensaje:
-            cartas = mensaje["Cartas"]
+        if "Cartas Posibles" in mensaje:
+            cartas = mensaje["Cartas Posibles"]
+            print(cartas)
             self.modelo.set_cartas_posibles(cartas)
             self.vista.set_cartas_posibles(self.modelo)
 
@@ -133,12 +134,12 @@ class Controlador(object):
         if "Ganador Partida" in mensaje:
             self.cerrar_websockets()
             ganador = mensaje["Ganador Partida"]
-            if self.num_jugadores != 4:
+            if self.num_jugadores != 4 and ganador != None:
                 if ganador == self.num_jugador:
                     self.vista.ganador_partida(True)
                 else:
                     self.vista.ganador_partida(False)
-            else:
+            elif ganador != None:
                 if self.num_jugador in ganador:
                     self.vista.ganador_partida(True)
                 else:

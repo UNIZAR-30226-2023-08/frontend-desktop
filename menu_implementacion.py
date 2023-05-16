@@ -3,10 +3,10 @@ import requests
 import subprocess
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QStackedWidget, QWidget, QVBoxLayout, QStyleFactory
-from PyQt5.QtGui import QColor
 from Interfaces.menu_buscar_partida import Ui_menu_buscar_partida
 from Interfaces.menuInicial import Ui_menu_inicial
 from Interfaces.estadisticas import Ui_estadisticas
+from Interfaces.tienda import Ui_Tienda
 
 class menu_implementacion(QMainWindow):
     def __init__(self, access_token, username) -> None:
@@ -33,10 +33,15 @@ class menu_implementacion(QMainWindow):
         self.ui_estadisticas = Ui_estadisticas()
         self.ui_estadisticas.setupUi(self.estadisticas_widget)
 
+        self.tienda_widget = QWidget()
+        self.ui_tienda = Ui_Tienda()
+        self.ui_tienda.setupUi(self.tienda_widget)
+
         #Agrega los widgets al QstackedWidget
         self.stacked_widget.addWidget(self.menu_inicial_widget)
         self.stacked_widget.addWidget(self.buscar_partida_widget)
         self.stacked_widget.addWidget(self.estadisticas_widget)
+        self.stacked_widget.addWidget(self.tienda_widget)
 
         # Crear un objeto QWidget que contendrá el QStackedWidget
         centralWidget = QWidget()
@@ -52,8 +57,10 @@ class menu_implementacion(QMainWindow):
         #Conectar señales de los botones
         self.ui_menu_inicial.boton_jugar.clicked.connect(self.pantalla_buscar_partida)
         self.ui_menu_inicial.boton_estadisticas.clicked.connect(self.pantalla_estadisticas)
+        self.ui_menu_inicial.boton_tienda.clicked.connect(self.pantalla_tienda)
         self.ui_buscar_partida.boton_volver.clicked.connect(self.pantalla_inicial)
         self.ui_estadisticas.boton_volver.clicked.connect(self.pantalla_inicial)
+        self.ui_tienda.boton_volver.clicked.connect(self.pantalla_inicial)
         self.ui_buscar_partida.comboBox.currentIndexChanged.connect(self.seleccionar_tipo_partida)
         self.ui_buscar_partida.boton_buscar_publica.clicked.connect(self.buscar_partida_publica)
         self.ui_buscar_partida.boton_crear_privada.clicked.connect(self.crear_partida_privada)
@@ -90,6 +97,10 @@ class menu_implementacion(QMainWindow):
         self.stacked_widget.setCurrentWidget(self.estadisticas_widget)
         self.rellenar_pantalla_estadisticas()
 
+    def pantalla_tienda(self):
+        self.stacked_widget.setCurrentWidget(self.tienda_widget)
+        self.inicializar_botones_tienda()
+
     def pantalla_inicial(self):
         self.stacked_widget.setCurrentWidget(self.menu_inicial_widget)
         self.ui_estadisticas.listWidget.clear()
@@ -100,7 +111,7 @@ class menu_implementacion(QMainWindow):
 
     def rellenarEstadisticas(self):
         headers = {'Authorization': f'Bearer ' + self.token}
-        response = requests.get('http://guinote-unizar.onrender.com/users/me', headers=headers)
+        response = requests.get('https://guinote-unizar.onrender.com/users/me', headers=headers)
         response_parsed = response.json()
         nombre_usuario = response_parsed['username']
         victorias = int(response_parsed['wonMatches'])
@@ -121,7 +132,7 @@ class menu_implementacion(QMainWindow):
     def rellenarRanking(self):
         parametros = {'limite_lista': 10}
         headers = {'Authorization': f'Bearer ' + self.token}
-        response = requests.get('http://guinote-unizar.onrender.com/ranking', headers=headers,params=parametros)
+        response = requests.get('https://guinote-unizar.onrender.com/ranking', headers=headers,params=parametros)
         response_parsed = response.json()
 
         ranking = response_parsed
@@ -179,15 +190,26 @@ class menu_implementacion(QMainWindow):
         elif text == "Partida 4 jugadores":
             subprocess.call(["python", "tablero4_implementacion.py", self.username, "privada", codigo])
 
+    def inicializar_botones_tienda(self):
+        headers = {'Authorization': f'Bearer ' + self.token}
+        response = requests.get('https://guinote-unizar.onrender.com/users/me', headers=headers)
+        response_parsed = response.json()
+        monedas = int(response_parsed['coins'])
+
+        parametros = {'username': self.username}
+        response2 = requests.get('https://guinote-unizar.onrender.com/tienda/barajas', headers=headers, params=parametros)
+        response_parsed2 = response2.json()
+        baraja = int(response_parsed2)
+        print(response_parsed2)
+
+
     def crear_torneo(self):
         pass
     def ingresar_torneo(self):
         pass
 
         
-    # def pantalla_tienda(self):
-        
-def main():
+def main(): 
     app = QApplication(sys.argv)
     token = sys.argv[1]
     username = sys.argv[2]
