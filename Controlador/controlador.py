@@ -47,10 +47,11 @@ class Controlador(object):
             cartas = self.formatear_cartas(mensaje["Cartas"])
             self.modelo.set_mano(cartas)
             self.vista.rellenarMiMano(self.modelo)
+            self.modelo.set_cartas_posibles(cartas)
             self.vista.set_cartas_posibles(self.modelo)
             
         if "Cartas Posibles" in mensaje:
-            cartas = mensaje["Cartas Posibles"]
+            cartas = self.formatear_cartas(mensaje["Cartas Posibles"])
             print(cartas)
             self.modelo.set_cartas_posibles(cartas)
             self.vista.set_cartas_posibles(self.modelo)
@@ -134,12 +135,12 @@ class Controlador(object):
         if "Ganador Partida" in mensaje:
             self.cerrar_websockets()
             ganador = mensaje["Ganador Partida"]
-            if self.num_jugadores != 4 and ganador != None:
+            if self.num_jugadores != 4:
                 if ganador == self.num_jugador:
                     self.vista.ganador_partida(True)
                 else:
                     self.vista.ganador_partida(False)
-            elif ganador != None:
+            else:
                 if self.num_jugador in ganador:
                     self.vista.ganador_partida(True)
                 else:
@@ -175,11 +176,14 @@ class Controlador(object):
     def iniciarSocket(self):
         #websocket.enableTrace(True)
         if self.tipo == "publica":
-            self.ws = websocket.WebSocketApp("wss://guinote-unizar.onrender.com/partida" + str(self.num_jugadores) + "/" + self.username,
+            #"wss://guinote-unizar.onrender.com/partida" + str(self.num_jugadores) + "/" + self.username
+            #"wss://guinote-unizar.onreder.com/partidaIA/" + self.username
+            self.ws = websocket.WebSocketApp("wss://guinote-unizar.onrender.com/partidaIA/" + self.username,
                                         on_open=self.on_open,
                                         on_message=self.gestor_mensajes,
                                         on_error=self.on_error,
                                         on_close=self.on_close)
+            self.num_jugador = 0
         
         if self.tipo == "privada":
             if self.codigo == "crear":

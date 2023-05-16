@@ -27,6 +27,8 @@ class modelo_tablero:
 
     def get_num_cartas_posibles(self):
         num_cartas_posibles = []
+        print(self.mis_cartas)
+        print(self.cartas_posibles)
         for carta_posible in self.cartas_posibles:
             if carta_posible in self.mis_cartas:
                 i = self.mis_cartas.index(carta_posible)
