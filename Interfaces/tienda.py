@@ -20,7 +20,7 @@ class Ui_Tienda(object):
         self.fondo = QtWidgets.QLabel(Form)
         self.fondo.setGeometry(QtCore.QRect(0, 0, 706, 497))
         self.fondo.setText("")
-        self.fondo.setPixmap(QtGui.QPixmap("../Imagenes/Tapete_verde.jpg"))
+        self.fondo.setPixmap(QtGui.QPixmap(":/logo/Tapete_verde.jpg"))
         self.fondo.setObjectName("fondo")
         self.boton_volver = QtWidgets.QPushButton(Form)
         self.boton_volver.setGeometry(QtCore.QRect(30, 20, 101, 31))
@@ -97,7 +97,7 @@ class Ui_Tienda(object):
         self.label_6.setObjectName("label_6")
         self.equipar1 = QtWidgets.QPushButton(Form)
         self.equipar1.setGeometry(QtCore.QRect(480, 230, 97, 29))
-        self.equipar1.setStyleSheet("background-color: rgb(38, 162, 105);")
+        self.equipar1.setStyleSheet("background-color: rgb(143, 240, 164);")
         self.equipar1.setObjectName("equipar1")
         self.comprar2 = QtWidgets.QPushButton(Form)
         self.comprar2.setGeometry(QtCore.QRect(296, 280, 111, 29))
@@ -149,3 +149,4 @@ class Ui_Tienda(object):
         self.equipar2.setText(_translate("Form", "Equipar"))
         self.equipar3.setText(_translate("Form", "Equipar"))
         self.equipar4.setText(_translate("Form", "Equipar"))
+import Imagenes.imagenes_rc

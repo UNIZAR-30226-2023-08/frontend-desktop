@@ -83,7 +83,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="../Imagenes/imagenes.qrc">:/cartas/cartas1/cartasRivalesHor.png</pixmap>
+       <pixmap resource="../Imagenes/imagenes.qrc">:/cartas/default/cartasRivalesHor.png</pixmap>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -100,7 +100,7 @@
            <string/>
           </property>
           <property name="pixmap">
-           <pixmap resource="../Imagenes/imagenes.qrc">:/cartas/cartas1/dorso.png</pixmap>
+           <pixmap>:/cartas/cartas1/dorso.png</pixmap>
           </property>
          </widget>
         </item>
@@ -342,7 +342,7 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="../Imagenes/imagenes.qrc">:/cartas/cartas1/cartasRivalesVer.png</pixmap>
+    <pixmap resource="../Imagenes/imagenes.qrc">:/cartas/default/cartasRivalesVer.png</pixmap>
    </property>
   </widget>
   <widget class="QLabel" name="label_4">
@@ -358,7 +358,7 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="../Imagenes/imagenes.qrc">:/cartas/cartas1/cartasRivalesVer.png</pixmap>
+    <pixmap resource="../Imagenes/imagenes.qrc">:/cartas/default/cartasRivalesVer.png</pixmap>
    </property>
   </widget>
   <widget class="QLabel" name="label_5">

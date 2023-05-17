@@ -38,7 +38,7 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>../Imagenes/Tapete_verde.jpg</pixmap>
+    <pixmap resource="../Imagenes/imagenes.qrc">:/logo/Tapete_verde.jpg</pixmap>
    </property>
   </widget>
   <widget class="QPushButton" name="boton_volver">
@@ -274,7 +274,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(38, 162, 105);</string>
+    <string notr="true">background-color: rgb(143, 240, 164);</string>
    </property>
    <property name="text">
     <string>Equipado</string>
@@ -386,6 +386,8 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../Imagenes/imagenes.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -13,9 +13,10 @@ class tablero_implementacion(QMainWindow):
     num_cartas_posibles = []
     posicones = [0, 1, 2]
 
-    def __init__(self, username, tipo, codigo) -> None:
+    def __init__(self, username, tipo, codigo, baraja) -> None:
         super().__init__()
         self.username = username
+        self.baraja = baraja
         modelo = modelo_tablero()
         self.inicializarGUI()
         num_jugadores = 3
@@ -69,15 +70,15 @@ class tablero_implementacion(QMainWindow):
 
     def mostrar_jugadores_sala_espera(self, modelo: modelo_tablero):
         self.ui_sala_espera.j1_label.setText(modelo.jugador0)
-        self.ui_sala_espera.dorso1_label.setPixmap(QtGui.QPixmap(":/cartas/cartas1/oro-1.png"))
+        self.ui_sala_espera.dorso1_label.setPixmap(QtGui.QPixmap(":/cartas/"+ self.baraja +"/oro-1.png"))
 
         if modelo.jugador1 != "Esperando...":
             self.ui_sala_espera.j2_label.setText(modelo.jugador1)
-            self.ui_sala_espera.dorso2_label.setPixmap(QtGui.QPixmap(":/cartas/cartas1/copa-1.png"))
+            self.ui_sala_espera.dorso2_label.setPixmap(QtGui.QPixmap(":/cartas/"+ self.baraja +"/copa-1.png"))
 
         if modelo.jugador2 != "Esperando...":
             self.ui_sala_espera.j3_label.setText(modelo.jugador2)
-            self.ui_sala_espera.dorso3_label.setPixmap(QtGui.QPixmap(":/cartas/cartas1/espada-1.png"))
+            self.ui_sala_espera.dorso3_label.setPixmap(QtGui.QPixmap(":/cartas/"+ self.baraja +"/espada-1.png"))
 
         
 
@@ -141,17 +142,17 @@ class tablero_implementacion(QMainWindow):
         print(posiciones_rotadas)
 
         if modelo.cartas_jugadas[posiciones_rotadas[0]] != "":
-            self.ui_tablero.carta_jugada1.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.cartas_jugadas[posiciones_rotadas[0]] + ".png").scaled(100,200))
+            self.ui_tablero.carta_jugada1.setPixmap(QtGui.QPixmap(":/cartas/"+ self.baraja +"/" + modelo.cartas_jugadas[posiciones_rotadas[0]] + ".png").scaled(100,200))
         else:
             self.ui_tablero.carta_jugada1.setPixmap(pixmap)
         
         if modelo.cartas_jugadas[posiciones_rotadas[1]] != "":
-            self.ui_tablero.carta_jugada2.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.cartas_jugadas[posiciones_rotadas[1]] + ".png").scaled(100,200))
+            self.ui_tablero.carta_jugada2.setPixmap(QtGui.QPixmap(":/cartas/"+ self.baraja +"/" + modelo.cartas_jugadas[posiciones_rotadas[1]] + ".png").scaled(100,200))
         else:
             self.ui_tablero.carta_jugada2.setPixmap(pixmap)
 
         if modelo.cartas_jugadas[posiciones_rotadas[2]] != "":
-            self.ui_tablero.carta_jugada3.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.cartas_jugadas[posiciones_rotadas[2]] + ".png").scaled(100,200))
+            self.ui_tablero.carta_jugada3.setPixmap(QtGui.QPixmap(":/cartas/"+ self.baraja +"/" + modelo.cartas_jugadas[posiciones_rotadas[2]] + ".png").scaled(100,200))
         else:
             self.ui_tablero.carta_jugada3.setPixmap(pixmap)
 
@@ -162,46 +163,46 @@ class tablero_implementacion(QMainWindow):
         
         #Carta 0
         if modelo.mis_cartas[0] != "":
-            self.ui_tablero.carta1.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.mis_cartas[0] + ".png"))
+            self.ui_tablero.carta1.setPixmap(QtGui.QPixmap(":/cartas/"+ self.baraja +"/" + modelo.mis_cartas[0] + ".png"))
         else:
             self.ui_tablero.carta1.setPixmap(pixmap)
         
         #Carta 1
         if modelo.mis_cartas[1] != "":
-            self.ui_tablero.carta2.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.mis_cartas[1] + ".png"))
+            self.ui_tablero.carta2.setPixmap(QtGui.QPixmap(":/cartas/"+ self.baraja +"/" + modelo.mis_cartas[1] + ".png"))
         else:
             self.ui_tablero.carta2.setPixmap(pixmap)
         
         #Carta 2
         if modelo.mis_cartas[2] != "":
-            self.ui_tablero.carta3.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.mis_cartas[2] + ".png"))
+            self.ui_tablero.carta3.setPixmap(QtGui.QPixmap(":/cartas/"+ self.baraja +"/" + modelo.mis_cartas[2] + ".png"))
         else:
             self.ui_tablero.carta3.setPixmap(pixmap)
         
         #Carta 3
         if modelo.mis_cartas[3] != "":
-            self.ui_tablero.carta4.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.mis_cartas[3] + ".png"))
+            self.ui_tablero.carta4.setPixmap(QtGui.QPixmap(":/cartas/"+ self.baraja +"/" + modelo.mis_cartas[3] + ".png"))
         else:
             self.ui_tablero.carta4.setPixmap(pixmap)
         
         #Carta 4
         if modelo.mis_cartas[4] != "":
-            self.ui_tablero.carta5.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.mis_cartas[4] + ".png"))
+            self.ui_tablero.carta5.setPixmap(QtGui.QPixmap(":/cartas/"+ self.baraja +"/" + modelo.mis_cartas[4] + ".png"))
         else:
             self.ui_tablero.carta5.setPixmap(pixmap)
         
         #Carta 5
         if modelo.mis_cartas[5] != "":
-            self.ui_tablero.carta6.setPixmap(QtGui.QPixmap(":/cartas/cartas1/" + modelo.mis_cartas[5] + ".png"))
+            self.ui_tablero.carta6.setPixmap(QtGui.QPixmap(":/cartas/"+ self.baraja +"/" + modelo.mis_cartas[5] + ".png"))
         else:
             self.ui_tablero.carta6.setPixmap(pixmap)
 
     def mostrarTriunfo(self, modelo: modelo_tablero):
-        pm = QtGui.QPixmap(":/cartas/cartas1/" + modelo.carta_triunfo + ".png")
+        pm = QtGui.QPixmap(":/cartas/"+ self.baraja +"/" + modelo.carta_triunfo + ".png")
         t = QtGui.QTransform()
         t.rotate(-90)
         self.ui_tablero.carta_triunfo.setPixmap(pm.transformed(t))
-        self.ui_tablero.label_3.setPixmap(QtGui.QPixmap(":/cartas/cartas1/dorso.png"))
+        self.ui_tablero.label_3.setPixmap(QtGui.QPixmap(":/cartas/"+ self.baraja +"/dorso.png"))
     
     def arrastre(self):
         pixmap = QtGui.QPixmap()
@@ -237,8 +238,9 @@ def main():
     username = sys.argv[1]
     tipo = sys.argv[2]
     codigo = sys.argv[3]
+    baraja = sys.argv[4]
     app = QApplication(sys.argv)
-    ventana = tablero_implementacion(username, tipo, codigo)
+    ventana = tablero_implementacion(username, tipo, codigo, baraja)
     ventana.show()
     sys.exit(app.exec_())
 

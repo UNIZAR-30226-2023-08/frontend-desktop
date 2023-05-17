@@ -29,7 +29,7 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>:/logo/Tapete_verde.jpg</pixmap>
+    <pixmap resource="../Imagenes/imagenes.qrc">:/logo/Tapete_verde.jpg</pixmap>
    </property>
   </widget>
   <widget class="QLabel" name="dorso">
@@ -51,7 +51,7 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>:/cartas/cartas1/oro-1.png</pixmap>
+    <pixmap resource="../Imagenes/imagenes.qrc">:/cartas/default/oro-1.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -174,8 +174,7 @@ font: 75 italic 26pt &quot;Sans&quot;;
   </widget>
  </widget>
  <resources>
-  <include location="frontend-desktop/Imagenes/imagenes.qrc"/>
-  <include location="../../../../../Imagenes/imagenes.qrc"/>
+  <include location="../Imagenes/imagenes.qrc"/>
  </resources>
  <connections/>
 </ui>

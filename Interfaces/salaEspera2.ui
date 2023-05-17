@@ -125,7 +125,7 @@ border-color: rgb(0, 0, 0);</string>
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="../Imagenes/imagenes.qrc">:/cartas/cartas1/dorso.png</pixmap>
+         <pixmap resource="../Imagenes/imagenes.qrc">:/cartas/default/dorso.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -181,7 +181,7 @@ border-color: rgb(0, 0, 0);</string>
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="../Imagenes/imagenes.qrc">:/cartas/cartas1/dorso.png</pixmap>
+         <pixmap resource="../Imagenes/imagenes.qrc">:/cartas/default/dorso.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
