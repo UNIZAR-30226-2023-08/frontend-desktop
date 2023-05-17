@@ -129,7 +129,7 @@ border-color: rgb(0, 0, 0);</string>
          <property name="geometry">
           <rect>
            <x>30</x>
-           <y>110</y>
+           <y>100</y>
            <width>151</width>
            <height>51</height>
           </rect>
@@ -147,6 +147,30 @@ border-color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>Buscar Partida</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="boton_ia">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>180</y>
+           <width>151</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Calibri</family>
+           <pointsize>11</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 0);</string>
+         </property>
+         <property name="text">
+          <string>Jugar contra IA</string>
          </property>
         </widget>
        </widget>

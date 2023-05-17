@@ -33,6 +33,8 @@ class Controlador(object):
 
     def cambiar7(self, decision):
         self.ws.send(decision)
+        msj = self.modelo.devolver_jugador(self.num_jugador) + " ha cambiado el 7"
+        self.vista.mostrar_cante(msj)
         
     def on_open(self, ws):
         print("Conexión creada")
@@ -59,6 +61,7 @@ class Controlador(object):
         if "Triunfo" in mensaje:
             triunfo = mensaje["Triunfo"]
             if triunfo != None:
+                print("siu")
                 self.modelo.set_triunfo(triunfo[0] + "-" + str(triunfo[1]))
                 self.vista.mostrarTriunfo(self.modelo)
 
@@ -68,6 +71,9 @@ class Controlador(object):
                 self.vista.puede_jugar(True, None)
             else:
                 self.vista.puede_jugar(False, None)
+
+        # if "Ganador" in mensaje:
+        #     self.vista.mostrar_ganador_baza(self.modelo.devolver_jugador(mensaje["Ganador"]))
 
         if "0" in mensaje:
             if not self.sala_espera: 
@@ -134,17 +140,54 @@ class Controlador(object):
 
         if "Ganador Partida" in mensaje:
             self.cerrar_websockets()
+            ptsRival1 = None
             ganador = mensaje["Ganador Partida"]
-            if self.num_jugadores != 4:
-                if ganador == self.num_jugador:
-                    self.vista.ganador_partida(True)
+            ptsMios = mensaje[str(self.num_jugador)]
+            if self.num_jugadores == 2:
+                if self.num_jugador == 0:
+                    ptsRival = mensaje["1"]
                 else:
-                    self.vista.ganador_partida(False)
+                    ptsRival = mensaje["0"]
+            elif self.num_jugadores == 3:
+                if self.num_jugador == 0:
+                    ptsRival1 = mensaje["1"]
+                    ptsRival2 = mensaje["2"]
+                elif self.num_jugador == 1:
+                    ptsRival1 = mensaje["2"]
+                    ptsRival2 = mensaje["0"]
+                else:
+                    ptsRival1 = mensaje["0"]
+                    ptsRival2 = mensaje["1"]
             else:
-                if self.num_jugador in ganador:
-                    self.vista.ganador_partida(True)
+                if self.num_jugador == 0 or self.num_jugador == 2:
+                    ptsRival = mensaje["1"]
                 else:
-                    self.vista.ganador_partida(False)
+                    ptsRival = mensaje["0"]
+
+            if ptsRival1 == None:
+                if ptsMios > ptsRival:
+                    ptosGanador = ptsMios
+                else:
+                    ptosGanador = ptsRival
+            else:
+                if ptsMios > ptsRival1 and ptsMios > ptsRival2:
+                    ptosGanador = ptsMios
+                elif ptsRival1 > ptsRival2:
+                    ptosGanador = ptsRival1
+                else:
+                    ptosGanador = ptsRival2
+
+            if ganador != None:
+                if self.num_jugadores != 4:
+                    msg = "Ganador de la partida " + self.modelo.devolver_jugador(ganador) + " con " + str(ptosGanador) + " puntos"
+                else:
+                    msg = "Ganadores de la partida " + self.modelo.devolver_jugador(ganador[0]) + " y \n" + self.modelo.devolver_jugador(ganador[1]) + " con " + str(ptosGanador) + " puntos"
+            else:
+                if self.num_jugadores != 3:
+                    msg = "Tus puntos: " + str(ptsMios) + ", Puntos rival: " + str(ptsRival)
+                else:
+                    msg = "Tus puntos: " + str(ptsMios) + ", Puntos rival 1: " + str(ptsRival1) + ", Puntos rival 2: " + str(ptsRival2)
+            self.vista.mostrar_cante(msg)
 
         if "chat" in mensaje:
             idChat = mensaje["chat"]
@@ -158,6 +201,13 @@ class Controlador(object):
             puede = mensaje["Cambiar7"]
             if puede:
                 self.vista.puede_cambiar()
+
+        if "Canta" in mensaje:
+            puntos = mensaje["Canta"]
+            palo = mensaje["Palo"]
+            jug = self.modelo.devolver_jugador(mensaje["Jugador"])
+            msg = jug + " canta " + str(puntos) + " en " + palo
+            self.vista.mostrar_cante(msg)
 
 
         if "Comienza partida" == mensaje:
@@ -177,13 +227,12 @@ class Controlador(object):
         #websocket.enableTrace(True)
         if self.tipo == "publica":
             #"wss://guinote-unizar.onrender.com/partida" + str(self.num_jugadores) + "/" + self.username
-            #"wss://guinote-unizar.onreder.com/partidaIA/" + self.username
-            self.ws = websocket.WebSocketApp("wss://guinote-unizar.onrender.com/partidaIA/" + self.username,
+            #"wss://guinote-unizar.onrender.com/partidaIA/" + self.username
+            self.ws = websocket.WebSocketApp("wss://guinote-unizar.onrender.com/partida" + str(self.num_jugadores) + "/" + self.username,
                                         on_open=self.on_open,
                                         on_message=self.gestor_mensajes,
                                         on_error=self.on_error,
                                         on_close=self.on_close)
-            self.num_jugador = 0
         
         if self.tipo == "privada":
             if self.codigo == "crear":
@@ -197,6 +246,17 @@ class Controlador(object):
                                         on_message=self.gestor_mensajes,
                                         on_error=self.on_error,
                                         on_close=self.on_close)
+        
+        if self.tipo == "ia":
+            self.ws = websocket.WebSocketApp("wss://guinote-unizar.onrender.com/partidaIA/" + self.username,
+                                        on_open=self.on_open,
+                                        on_message=self.gestor_mensajes,
+                                        on_error=self.on_error,
+                                        on_close=self.on_close)
+            self.num_jugador = 0
+            self.modelo.set_jugadores(self.username, "IA-1", "IA-2", "IA-3")
+            self.vista.mostrar_nombres_jugadores(self.modelo, self.num_jugador)
+
         
         self.ws.run_forever()
 
@@ -214,6 +274,8 @@ class Controlador(object):
     def enviar_mensaje_chat(self, mensaje):
         try:
             message = json.dumps(mensaje)
+            while '"' in message:
+                message = message.replace('"', '')
             self.ws_chat.send(message)
         except:
             pass

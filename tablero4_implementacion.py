@@ -174,6 +174,9 @@ class tablero_implementacion(QMainWindow):
             self.ui_tablero.carta_jugada4.setPixmap(pixmap)
 
     def rellenarMiMano(self, modelo: modelo_tablero):
+        self.ui_tablero.label_info.setText("")
+        self.ui_tablero.label_info.setStyleSheet("""
+        """)
         self.ui_tablero.botonCambiar7.setEnabled(False)
         pixmap = QtGui.QPixmap(":/logo/Tapete_verde.jpg").scaled(118, 260)
         pixmap.fill(QtCore.Qt.transparent)
@@ -233,15 +236,16 @@ class tablero_implementacion(QMainWindow):
         self.ui_tablero.carta_triunfo.setPixmap(pixmap)
         self.ui_tablero.label_3.setPixmap(pixmap)
 
-    def ganador_partida(self, ganador):
-        mensaje = QMessageBox(self)
-        mensaje.setWindowTitle("Ganador")
-        if ganador == True:
-            mensaje.setText("Has ganado la partida")
-        else:
-            mensaje.setText("Has perdido la partida")
-        mensaje.exec_()
-        QtCore.QMetaObject.invokeMethod(self, "close", QtCore.Qt.QueuedConnection)
+    # def ganador_partida(self, ganador):
+    #     if ganador == True:
+    #         self.ui_tablero.label_info.setText("Has ganado la partida con ")
+    #         self.ui_tablero.label_info.setStyleSheet("""
+    #         background-color: rgb(154, 153, 150);
+    #     """)
+    #     else:
+    #         mensaje.setText("Has perdido la partida")
+    #     mensaje.exec_()
+    #     QtCore.QMetaObject.invokeMethod(self, "close", QtCore.Qt.QueuedConnection)
 
     def mostrar_codigo(self, codigo):
         self.ui_sala_espera.label_codigo.setText("Código: " + str(codigo))
@@ -255,6 +259,18 @@ class tablero_implementacion(QMainWindow):
         self.ui_tablero.text_chat.clear()
         if texto != "":
             self.controlador.enviar_mensaje_chat(texto)
+
+    def mostrar_ganador_baza(self, nombre):
+        self.ui_tablero.label_info.setText("Ganador de la baza: " + nombre)
+        self.ui_tablero.label_info.setStyleSheet("""
+        background-color: rgb(154, 153, 150);
+        """)
+
+    def mostrar_cante(self, msg):
+        self.ui_tablero.label_info.setText(msg)
+        self.ui_tablero.label_info.setStyleSheet("""
+        background-color: rgb(154, 153, 150);
+        """)
         
 
 def main():

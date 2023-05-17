@@ -60,3 +60,12 @@ class modelo_tablero:
         if jugador3 != None:
             self.jugador3 = jugador3
         
+    def devolver_jugador(self, id):
+        if id == 0:
+            return self.jugador0
+        elif id == 1:
+            return self.jugador1
+        elif id == 2:
+            return self.jugador2
+        else:
+            return self.jugador3

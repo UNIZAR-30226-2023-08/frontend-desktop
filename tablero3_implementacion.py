@@ -17,6 +17,7 @@ class tablero_implementacion(QMainWindow):
         super().__init__()
         self.username = username
         self.baraja = baraja
+        self.num_jugadas = 0
         modelo = modelo_tablero()
         self.inicializarGUI()
         num_jugadores = 3
@@ -157,6 +158,10 @@ class tablero_implementacion(QMainWindow):
             self.ui_tablero.carta_jugada3.setPixmap(pixmap)
 
     def rellenarMiMano(self, modelo: modelo_tablero):
+        self.ui_tablero.label_info.setText("")
+        self.ui_tablero.label_info.setStyleSheet("""
+        """)
+        self.num_jugadas += 1
         self.ui_tablero.botonCambiar7.setEnabled(False)
         pixmap = QtGui.QPixmap().scaled(118, 260)
         pixmap.fill(QtCore.Qt.transparent)
@@ -205,10 +210,11 @@ class tablero_implementacion(QMainWindow):
         self.ui_tablero.label_3.setPixmap(QtGui.QPixmap(":/cartas/"+ self.baraja +"/dorso.png"))
     
     def arrastre(self):
-        pixmap = QtGui.QPixmap()
-        pixmap.fill(QtCore.Qt.transparent)
-        self.ui_tablero.carta_triunfo.setPixmap(pixmap)
-        self.ui_tablero.label_3.setPixmap(pixmap)
+        if self.num_jugadas > 10:
+            pixmap = QtGui.QPixmap()
+            pixmap.fill(QtCore.Qt.transparent)
+            self.ui_tablero.carta_triunfo.setPixmap(pixmap)
+            self.ui_tablero.label_3.setPixmap(pixmap)
 
     def ganador_partida(self, ganador):
         mensaje = QMessageBox(self)
@@ -233,6 +239,17 @@ class tablero_implementacion(QMainWindow):
         if texto != "":
             self.controlador.enviar_mensaje_chat(texto)
         
+    def mostrar_ganador_baza(self, nombre):
+        self.ui_tablero.label_info.setText("Ganador de la baza: " + nombre)
+        self.ui_tablero.label_info.setStyleSheet("""
+        background-color: rgb(154, 153, 150);
+        """)
+
+    def mostrar_cante(self, msg):
+        self.ui_tablero.label_info.setText(msg)
+        self.ui_tablero.label_info.setStyleSheet("""
+        background-color: rgb(154, 153, 150);
+        """)
 
 def main():
     username = sys.argv[1]

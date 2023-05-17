@@ -68,6 +68,7 @@ class menu_implementacion(QMainWindow):
         self.ui_buscar_partida.boton_ingresar_privada.clicked.connect(self.ingresar_partida_privada)
         self.ui_buscar_partida.boton_crear_torneo.clicked.connect(self.crear_torneo)
         self.ui_buscar_partida.boton_ingresar_torneo.clicked.connect(self.ingresar_torneo)
+        self.ui_buscar_partida.boton_ia.clicked.connect(self.buscar_partida_ia)
         self.ui_tienda.comprar2.clicked.connect(self.comprar_baraja2)
         self.ui_tienda.comprar3.clicked.connect(self.comprar_baraja3)
         self.ui_tienda.comprar4.clicked.connect(self.comprar_baraja4)
@@ -154,16 +155,20 @@ class menu_implementacion(QMainWindow):
             self.activar_botones_menu(False)
         elif text == "Partida 2 jugadores":
             self.activar_botones_menu(True)
+            self.ui_buscar_partida.boton_ia.setEnabled(False)
         elif text == "Partida 3 jugadores":
             self.activar_botones_menu(True)
             self.ui_buscar_partida.boton_crear_torneo.setEnabled(False)
             self.ui_buscar_partida.boton_ingresar_torneo.setEnabled(False)
+            self.ui_buscar_partida.boton_ia.setEnabled(False)
         elif text == "Partida 4 jugadores":
             self.activar_botones_menu(True)
             self.ui_buscar_partida.boton_crear_torneo.setEnabled(False)
             self.ui_buscar_partida.boton_ingresar_torneo.setEnabled(False)
+            self.ui_buscar_partida.boton_ia.setEnabled(True)
     
     def activar_botones_menu(self, activar):
+        self.ui_buscar_partida.boton_ia.setEnabled(activar)
         self.ui_buscar_partida.boton_buscar_publica.setEnabled(activar)
         self.ui_buscar_partida.boton_crear_privada.setEnabled(activar)
         self.ui_buscar_partida.boton_ingresar_privada.setEnabled(activar)
@@ -197,6 +202,9 @@ class menu_implementacion(QMainWindow):
             subprocess.call(["python", "tablero3_implementacion.py", self.username, "privada", codigo, self.baraja])
         elif text == "Partida 4 jugadores":
             subprocess.call(["python", "tablero4_implementacion.py", self.username, "privada", codigo, self.baraja])
+
+    def buscar_partida_ia(self):
+        subprocess.call(["python", "tablero4_implementacion.py", self.username, "ia", "", self.baraja])
 
     def inicializar_botones_tienda(self):
         headers = {'Authorization': f'Bearer ' + self.token}

@@ -11,7 +11,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from Interfaces.clickableLabel import ClickableLabel
 
-
 class Ui_tablero3(object):
     def setupUi(self, tablero3):
         tablero3.setObjectName("tablero3")
@@ -179,6 +178,12 @@ class Ui_tablero3(object):
         self.nombre_jugador1.setText("")
         self.nombre_jugador1.setAlignment(QtCore.Qt.AlignCenter)
         self.nombre_jugador1.setObjectName("nombre_jugador1")
+        self.label_info = QtWidgets.QLabel(tablero3)
+        self.label_info.setGeometry(QtCore.QRect(590, 300, 311, 171))
+        self.label_info.setStyleSheet("")
+        self.label_info.setText("")
+        self.label_info.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_info.setObjectName("label_info")
         self.label_5.raise_()
         self.horizontalLayoutWidget.raise_()
         self.verticalLayoutWidget.raise_()
@@ -193,6 +198,7 @@ class Ui_tablero3(object):
         self.nombre_jugador0.raise_()
         self.nombre_jugador2.raise_()
         self.nombre_jugador1.raise_()
+        self.label_info.raise_()
 
         self.retranslateUi(tablero3)
         QtCore.QMetaObject.connectSlotsByName(tablero3)

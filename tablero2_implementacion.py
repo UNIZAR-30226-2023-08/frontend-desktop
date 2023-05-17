@@ -139,6 +139,10 @@ class tablero_implementacion(QMainWindow):
             self.ui_tablero.carta_jugada2.setPixmap(pixmap)
         
     def rellenarMiMano(self, modelo: modelo_tablero):
+        self.ui_tablero.label_info.setText("")
+        self.ui_tablero.label_info.setStyleSheet("""
+        background-color: rgba(191, 64, 64, 0);
+        """)
         self.ui_tablero.botonCambiar7.setEnabled(False)
         pixmap = QtGui.QPixmap(":/logo/Tapete_verde.jpg").scaled(118, 260)
         pixmap.fill(QtCore.Qt.transparent)
@@ -221,6 +225,18 @@ class tablero_implementacion(QMainWindow):
         self.ui_tablero.text_chat.clear()
         if texto != "":
             self.controlador.enviar_mensaje_chat(texto)
+
+    def mostrar_ganador_baza(self, nombre):
+        self.ui_tablero.label_info.setText("Ganador de la baza: " + nombre)
+        self.ui_tablero.label_info.setStyleSheet("""
+        background-color: rgb(154, 153, 150);
+        """)
+
+    def mostrar_cante(self, msg):
+        self.ui_tablero.label_info.setText(msg)
+        self.ui_tablero.label_info.setStyleSheet("""
+        background-color: rgb(154, 153, 150);
+        """)
         
 
 def main():

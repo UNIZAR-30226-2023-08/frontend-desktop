@@ -384,6 +384,22 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
+  <widget class="QLabel" name="label_info">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>360</y>
+     <width>311</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
   <zorder>label_5</zorder>
   <zorder>horizontalLayoutWidget</zorder>
   <zorder>verticalLayoutWidget</zorder>
@@ -394,6 +410,7 @@
   <zorder>chat_box</zorder>
   <zorder>text_chat</zorder>
   <zorder>nombre_jugador0</zorder>
+  <zorder>label_info</zorder>
  </widget>
  <resources>
   <include location="../Imagenes/imagenes.qrc"/>
